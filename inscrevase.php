@@ -1,80 +1,50 @@
 <!DOCTYPE HTML>
 <html lang="pt-br">
-	<head>
-		<meta charset="UTF-8">
+<head>
+	<meta charset="UTF-8">
 
-		<title>Connect Facens</title>
-		<link rel="shortcut icon" href="imagens/icone.ico" />
-		<!-- jquery - link cdn -->
-		<script src="lib/jquery/jquery.min.js"></script>
-
-		<!-- bootstrap - link cdn -->
-		<link rel="stylesheet" href="lib/bootstrap/css/bootstrap.css">
+	<title>Connect Facens</title>
+	<link rel="shortcut icon" href="imagens/icone.ico" />
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600' rel='stylesheet' type='text/css'>
+	<link href="//netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css" rel="stylesheet">
 	
-	</head>
+</head>
 
-	<body>
+<body>
 
-		<!-- Static navbar -->
-	    <nav class="navbar navbar-default navbar-static-top">
-	      <div class="container">
-	        <div class="navbar-header">
-	          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-	            <span class="sr-only">Toggle navigation</span>
-	            <span class="icon-bar"></span>
-	            <span class="icon-bar"></span>
-	            <span class="icon-bar"></span>
-	          </button>
-	          <img src="imagens/logo_projeto.png" />
-	        </div>
-	        
-	        <div id="navbar" class="navbar-collapse collapse">
-	          <ul class="nav navbar-nav navbar-right">
-	            <li><a href="index.php">Voltar para Home</a></li>
-	          </ul>
-	        </div><!--/.nav-collapse -->
-	      </div>
-	    </nav>
+	<div class="testbox">
+		<h1>Cadastrar</h1>
 
-
-	    <div class="container">
-	    	
-	    	<br /><br />
-
-	    	<div class="col-md-4"></div>
-	    	<div class="col-md-4">
-	    		<h3>Inscreva-se já.</h3>
-	    		<br />
-				<form method="post" action="registra_usuario.php" id="formCadastrarse">
-					<div class="form-group">
-						<input type="text" class="form-control" id="usuario" name="usuario" placeholder="Usuário" required="requiored">
-					</div>
-
-					<div class="form-group">
-						<input type="email" class="form-control" id="email" name="email" placeholder="Email" required="requiored">
-					</div>
-					
-					<div class="form-group">
-						<input type="password" class="form-control" id="senha" name="senha" placeholder="Senha" required="requiored">
-					</div>
-					
-					<button type="submit" class="btn btn-primary form-control">Inscreva-se</button>
-				</form>
+		<form action="/">
+			<hr>
+			<div class="accounttype">
+				<input type="radio" value="None" id="radioOne" name="account" checked/>
+				<label for="radioOne" class="radio" chec>Aluno</label>
+				<input type="radio" value="None" id="radioTwo" name="account" />
+				<label for="radioTwo" class="radio">Não Aluno</label>
 			</div>
-			<div class="col-md-4"></div>
-
-			<div class="clearfix"></div>
-			<br />
-			<div class="col-md-4"></div>
-			<div class="col-md-4"></div>
-			<div class="col-md-4"></div>
-
-		</div>
-
-
-	    </div>
+			<hr>
+			<label id="icon" for="name"><i class="icon-envelope "></i></label>
+			<input type="text" name="name" id="name" placeholder="Email" required/>
+			<label id="icon" for="name"><i class="icon-user"></i></label>
+			<input type="text" name="name" id="name" placeholder="Nome" required/>
+			<label id="icon" for="name"><i class="icon-shield"></i></label>
+			<input type="password" name="name" id="name" placeholder="Senha" required/>
+			<div class="gender">
+				<input type="radio" value="None" id="male" name="gender" checked/>
+				<label for="male" class="radio" chec>Masc.</label>
+				<input type="radio" value="None" id="female" name="gender" />
+				<label for="female" class="radio">Fem.</label>
+			</div> 
+			<p>Clicando em registrar, você está aceitando nossos <a href="#">termos e condições</a>.</p>
+			<a href="#" class="button">Registrar</a>
+		</form>
+	</div>
 	
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-	
-	</body>
+
+</body>
+
+<script src="lib/material/js/jquery.min.js"></script>
+<script src="lib/material/js/bootstrap.min.js"></script>
+
 </html>

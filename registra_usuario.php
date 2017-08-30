@@ -11,6 +11,7 @@ $link = $objDb->conecta_mysql();
 $sql = " insert into usuarios(usuario, email, senha) values ('$usuario', '$email', '$senha')";
 
 if(mysqli_query($link, $sql)){
+	header('Location: index.php');
 echo 'Usuario registrado com sucesso';
 }else{
 echo 'Erro ao registrar o usuario';
