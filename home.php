@@ -17,9 +17,10 @@ if(!isset($_SESSION['usuario'])){
 	<title>Connect Facens</title>
 	<link rel="shortcut icon" href="imagens/icone.ico" />
 	
-	<!-- jquery - link cdn -->
-	<script src="lib/jquery/jquery.min.js"></script>
-	<script src="lib/javascript.js"></script>
+	<script src="lib/bootstrap2/js/jquery.min.js"></script>
+	<script src="lib/bootstrap2/js/bootstrap.min.js"></script>
+	
+	
 	<link href="lib/fa/css/font-awesome.min.css" rel="stylesheet">
 	<!-- bootstrap - link cdn -->
 	<link rel="stylesheet" href="lib/bootstrap/css/bootstrap.css">
@@ -85,18 +86,19 @@ if(!isset($_SESSION['usuario'])){
 										</a>
 									</li>
 									<li class="dropdown">
-										<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="http://jskrishna.com/work/merkury/images/user-pic.jpg" alt="Vinicius">
+										<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="http://jskrishna.com/work/merkury/images/user-pic.jpg">
+										<?php echo $_SESSION['usuario']; ?>
 											<b class="caret"></b></a>
 											<ul class="dropdown-menu">
 												<li>
 													<div class="navbar-content">
-														<span>JS Krishna</span>
+														<span>Connect Facens</span>
 														<p class="text-muted small">
-															me@jskrishna.com
+															connectfacens@gmail.com
 														</p>
 														<div class="divider">
 														</div>
-														<a href="#" class="view btn-sm active">View Profile</a>
+														<a href="sair.php" class="view btn-sm active">Sair</a>
 													</div>
 												</li>
 											</ul>
@@ -107,7 +109,7 @@ if(!isset($_SESSION['usuario'])){
 						</header>
 					</div>
 					<div class="user-dashboard">
-						<h1>Hello, Vinicius</h1>
+						<h1>Seja bem vindo, <?php echo $_SESSION['usuario']; ?></h1>
 						<div class="row">
 							<div class="col-md-5 col-sm-5 col-xs-12 gutter">
 
@@ -164,14 +166,13 @@ if(!isset($_SESSION['usuario'])){
 						<h4 class="modal-title">Adicionar Postagem</h4>
 					</div>
 					<div class="modal-body">
-						<input type="text" placeholder="Project Title" name="name">
-						<input type="text" placeholder="Post of Post" name="mail">
-						<input type="text" placeholder="Author" name="passsword">
-						<textarea placeholder="Desicrption"></textarea>
+						<input type="text" placeholder="Titulo" name="name">
+											
+						<textarea placeholder="Descrição"></textarea>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="cancel" data-dismiss="modal">Close</button>
-						<button type="button" class="add-project" data-dismiss="modal">Save</button>
+						<button type="button" class="cancel" data-dismiss="modal">Fechar</button>
+						<button type="button" class="add-project" data-dismiss="modal">Postar</button>
 					</div>
 				</div>
 

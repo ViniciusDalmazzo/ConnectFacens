@@ -144,15 +144,15 @@ $erro = isset($_GET['erro']) ? $_GET['erro'] : 0;
 									</div>
 									
 									<div class="checkbox text-left">
-										<label><input type="checkbox"><span class="check">I agree the terms & conditions.</span></label>
+										<label><input type="checkbox"><span class="check">Eu aceito com os termos e condições.</span></label>
 									</div>
 									
 									<div class="butn">
-										<button type="submit" class="btn btn-default btn-block btn-lg"><span class="glyphicon glyphicon-share-alt"></span> Resgister</button>
+										<button type="submit" class="btn btn-default btn-block btn-lg"><span class="glyphicon glyphicon-share-alt"></span> Registrar</button>
 									</div>
 									
 									<div class="already_member">
-										<p>Already a User ? <a href="#">Log In Here</a></p>
+										<p>Ja possui uma conta? <a href="#">Entre aqui</a></p>
 									</div>
 							</form>
 							<!--Registration Form Ends-->
@@ -200,7 +200,7 @@ $erro = isset($_GET['erro']) ? $_GET['erro'] : 0;
 	<!--Row Ends-->
 	
 	<div id="footer">
-		<p>Copyright © 2017 All Rights are Reserved. Designed By <a href="http://bootstraplayouts.com/">Connect Facens</a></p>
+		<p>Copyright © 2017 All Rights are Reserved. Designed By <a href="http://www.connectfacens.com.br/">Connect Facens</a></p>
 	</div>
 	
 </div>
