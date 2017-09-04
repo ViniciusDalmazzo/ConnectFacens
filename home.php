@@ -25,11 +25,11 @@ if(!isset($_SESSION['usuario'])){
 	<!-- bootstrap - link cdn -->
 	<link rel="stylesheet" href="lib/bootstrap/css/bootstrap.css">
 	<link rel="stylesheet" href="lib/body.css">
-	<link rel="stylesheet" href="lib/style.css">
+	<link rel="stylesheet" href="lib/home_css.css">
 	
 </head>
 
-<body class="home">
+<body class="home" style="height: 100%;">
 	<div class="container-fluid display-table">
 		<div class="row display-table-row">
 			<div class="col-md-2 col-sm-1 hidden-xs display-table-cell v-align box" id="navigation">
@@ -54,7 +54,7 @@ if(!isset($_SESSION['usuario'])){
 			<div class="col-md-10 col-sm-11 display-table-cell v-align" id="body-home">
 				<!--<button type="button" class="slide-toggle">Slide Toggle</button> -->
 				<div class="row">
-					<header>
+					<header style="height: 98px;">
 						<div class="col-md-7">
 							<nav class="navbar-default pull-left">
 								<div class="navbar-header">
@@ -70,7 +70,7 @@ if(!isset($_SESSION['usuario'])){
 								<input type="text" placeholder="Pesquisar" id="search">
 							</div>
 						</div>
-						<div class="col-md-5">
+						<div class="col-md-5" style="margin-top: 15px;">
 							<div class="header-rightside">
 								<ul class="list-inline header-top pull-right">
 									<li class="hidden-xs"><a href="#" class="add-project" data-toggle="modal" data-target="#add_project">Adicionar Postagem</a></li>

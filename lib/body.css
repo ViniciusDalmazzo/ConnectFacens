@@ -1,7 +1,4 @@
-                                                /*Main CSS*/
-                                            /*Login Signup Page*/
-                                            
-                                            a:focus,
+  a:focus,
                                             a:hover,
                                             a {
                                                 outline: none;
@@ -187,8 +184,6 @@
                                             
                                             #navigation {
                                                 background: #0e1a35;
-                                                height: 100%;
-
                                             }
                                             
                                             #navigation {
@@ -276,8 +271,6 @@
                                             .navi i {
                                                 font-size: 20px;
                                             }
-
-
                                             
                                             .label.label-primary {
                                                 border-radius: 50%;
