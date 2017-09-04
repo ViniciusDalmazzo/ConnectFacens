@@ -10,7 +10,7 @@ if(!isset($_SESSION['usuario'])){
 ?>
 
 <!DOCTYPE HTML>
-<html lang="pt-br">
+<html lang="pt-br" style="height: 100%;">
 <head>
 	<meta charset="UTF-8">
 
@@ -46,11 +46,7 @@ if(!isset($_SESSION['usuario'])){
 						<li><a href="#"><i class="fa fa-user" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Amigos</span></a></li>
 						<li><a href="#"><i class="fa fa-calendar" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Calendario</span></a></li>
 						<li><a href="#"><i class="fa fa-cog" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Configurações</span></a></li>
-						<li><a href="#"><span class="hidden-xs hidden-sm">Teste</span></a></li>
-						<li><a href="#"><span class="hidden-xs hidden-sm">Teste</span></a></li>
-						<li><a href="#"><span class="hidden-xs hidden-sm">Teste</span></a></li>
-						<li><a href="#"><span class="hidden-xs hidden-sm">Teste</span></a></li>
-						<li><a href="#"><span class="hidden-xs hidden-sm">Teste</span></a></li>
+						
 
 					</ul>
 				</div>
