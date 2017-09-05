@@ -58,7 +58,7 @@ $erro = isset($_GET['erro']) ? $_GET['erro'] : 0;
 
         <p class="forgot"><a href="#">Esqueci senha</a></p>
 
-        <div class="erro" style="font-size: 20px;text-align: center;margin-bottom: 10px;">
+        <div class="erro" style="font-size: 20px;text-align: center;margin-bottom: 15px;">
           <?php
 
           if($erro == 1){
@@ -79,7 +79,7 @@ $erro = isset($_GET['erro']) ? $_GET['erro'] : 0;
 
     <form action="registra_usuario.php" method="post" id="registration_form">
 
-      <div class="field-wrap">
+      <div>
         <div class="field-wrap">
           <label>
             Usuário<span class="req">*</span>
@@ -140,32 +140,7 @@ $erro = isset($_GET['erro']) ? $_GET['erro'] : 0;
 
 <script src="lib/index.js"></script>
 
-<script
-$(document).ready( function(){
-      $('#btn_login').click(function(){
 
-        var campo_vazio = false;
-
-        if($('#campo_usuario').val()==''){
-          campo_vazio = true;
-          $('#campo_usuario').css({'border-color': 'red'});
-        }else{
-          $('#campo_usuario').css({'border-color': 'lightgray'});
-        }
-        if($('#campo_senha').val()==''){
-          campo_vazio = true;
-          $('#campo_senha').css({'border-color': 'red'});
-        }else{
-          $('#campo_senha').css({'border-color': 'lightgray'});
-        }
-
-        if(campo_vazio) return false;
-
-      });
-    });
-
-
-</script>
 
 </body>
 </html>
