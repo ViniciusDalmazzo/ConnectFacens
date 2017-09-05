@@ -90,15 +90,15 @@ $erro_email = isset($_GET['erro_email']) ? $_GET['erro_email'] : 0;
               <input name="usuario" type="text"required autocomplete="off"/>
 
             </div>
-            <div style="text-align: center;padding: 10px;margin-bottom: -40px;">
-             <?php
+           <?php
 
-            if($erro_usuario == 1){
+            if($erro_usuario == 1){?>
+               <div style="text-align: center;padding: 10px;margin-bottom: -40px;">
               echo '<font color="red">Usuário já cadastrado</font>';
-            }                     
+               </div>
+                   <?php     }       
 
             ?>
-            </div>
 
            
           </div>
@@ -117,15 +117,17 @@ $erro_email = isset($_GET['erro_email']) ? $_GET['erro_email'] : 0;
 
             </div>
 
-            <div style="text-align: center;padding: 10px;margin-bottom: -40px;">
+           
             <?php
 
-            if($erro_email == 1){
+            if($erro_email == 1){?>
+               <div style="text-align: center;padding: 10px;margin-bottom: -40px;">
               echo '<font color="red">Email já cadastrado</font>';
-            }                   
+               </div>
+                   <?php     }       
 
             ?>
-            </div>
+           
           </div>
 
           
