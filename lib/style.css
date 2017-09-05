@@ -85,7 +85,7 @@ h1 {
 label {
   position: absolute;
   -webkit-transform: translateY(6px);
-          transform: translateY(6px);
+  transform: translateY(6px);
   left: 50px;
   color: rgba(255, 255, 255, 0.5);
   -webkit-transition: all 0.25s ease;
@@ -101,7 +101,7 @@ label .req {
 
 label.active {
   -webkit-transform: translateY(50px);
-          transform: translateY(50px);
+  transform: translateY(50px);
   left: 2px;
   font-size: 14px;
 }
@@ -188,7 +188,7 @@ textarea {
 #footer{
   margin-bottom: -15px;
   margin-top: 30px;
-	color:White;
+  color:White;
   text-align: center;
 }
 
@@ -200,4 +200,3 @@ textarea {
 {
   color: white;
 }
-

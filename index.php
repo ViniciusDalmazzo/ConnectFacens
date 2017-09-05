@@ -1,5 +1,7 @@
 <?php
 $erro = isset($_GET['erro']) ? $_GET['erro'] : 0;
+$erro_usuario = isset($_GET['erro_usuario']) ? $_GET['erro_usuario'] : 0;
+$erro_email = isset($_GET['erro_email']) ? $_GET['erro_email'] : 0;
 ?>
 
 <!DOCTYPE html>
@@ -13,7 +15,6 @@ $erro = isset($_GET['erro']) ? $_GET['erro'] : 0;
   <link rel="stylesheet" href="lib/bootstrap2/css/bootstrap.min.css">
   <link rel="stylesheet" href="lib/style.css">
   <link rel="stylesheet" href="lib/font-titillium.css">
-
   <script src="lib/bootstrap2/js/bootstrap.min.js"></script>
 
   
@@ -56,89 +57,116 @@ $erro = isset($_GET['erro']) ? $_GET['erro'] : 0;
           </div>
         </div>
 
-        <p class="forgot"><a href="#">Esqueci senha</a></p>
+        <p class="forgot"><a href="#">Esqueci a senha</a></p>
 
-        <div class="erro" style="font-size: 20px;text-align: center;margin-bottom: 15px;">
+        <div style="font-size: 20px;text-align: center;margin-bottom: 15px;">
           <?php
 
           if($erro == 1){
-          echo '<font color="red">Usuário e/ou senha inválido(s)</font>';
-        }                     
+            echo '<font color="red">Usuário e/ou senha inválido(s)</font>';
+          }                     
 
-        ?>
-      </div>
-
-      <button type="buttom" id="btn_login" class="button button-block"><span class="glyphicon glyphicon-share-alt"></span> Login</button>
-
-    </form>
-    
-  </div>
-
-  <div id="signup">   
-    <h1>Cadastre-se Grátis</h1>
-
-    <form action="registra_usuario.php" method="post" id="registration_form">
-
-      <div>
-        <div class="field-wrap">
-          <label>
-            Usuário<span class="req">*</span>
-          </label>
-          <div class="input-group">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-user login_form_icons"></i></span>	
-            <input name="usuario" type="text"required autocomplete="off"/>
-          </div>
-        </div>
-        
-
-
-        <div class="field-wrap">
-          <label>
-            Email<span class="req">*</span>
-          </label>
-          <div class="input-group">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-envelope login_form_icons"></i></span>	
-            <input name="email" type="email" required autocomplete="off"/>
-          </div>
+          ?>
         </div>
 
-        <div class="field-wrap">
-          <label>
-            Senha<span class="req">*</span>
-          </label>
-          <div class="input-group">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-lock login_form_icons"></i></span>
-            <input name="senha" type="password"required autocomplete="off"/>
-          </div>
-        </div>
-
-        <div class="field-wrap">
-          <label>
-            Confirmar Senha<span class="req">*</span>
-          </label>
-          <div class="input-group">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-lock login_form_icons"></i></span>
-            <input type="password"required autocomplete="off"/>
-          </div>
-        </div>
-
-        <button type="submit" class="button button-block"><span class="glyphicon glyphicon-share-alt"></span> Cadastrar</button>
+        <button type="buttom" id="btn_login" class="button button-block"><span class="glyphicon glyphicon-share-alt"></span> Login</button>
 
       </form>
 
     </div>
 
-  </div><!-- tab-content -->
+    <div id="signup">   
+      <h1>Cadastre-se Grátis</h1>
 
-</div> <!-- /form -->
+      <form action="registra_usuario.php" method="post" id="registration_form">
 
-<div id="footer">
-  <p>Connect Facens. Copyright © 2017 All Rights are Reserved.</a></p>
-</div>
+        <div>
+          <div class="field-wrap">
+            <label>
+              Usuário<span class="req">*</span>
+            </label>
+            <div class="input-group">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-user login_form_icons"></i></span>	
+              <input name="usuario" type="text"required autocomplete="off"/>
 
-<script src="lib/bootstrap2/js/jquery.min.js"></script>
+            </div>
+            <div style="text-align: center;padding: 10px;margin-bottom: -40px;">
+             <?php
 
-<script src="lib/index.js"></script>
+            if($erro_usuario == 1){
+              echo '<font color="red">Usuário já cadastrado</font>';
+            }                     
+
+            ?>
+            </div>
+
+           
+          </div>
+
+        
+
+
+
+          <div class="field-wrap" >
+            <label>
+              Email<span class="req">*</span>
+            </label>
+            <div class="input-group">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-envelope login_form_icons"></i></span>	
+              <input name="email" type="email" required autocomplete="off"/>
+
+            </div>
+
+            <div style="text-align: center;padding: 10px;margin-bottom: -40px;">
+            <?php
+
+            if($erro_email == 1){
+              echo '<font color="red">Email já cadastrado</font>';
+            }                   
+
+            ?>
+            </div>
+          </div>
+
+          
+
+          <div class="field-wrap" >
+            <label>
+              Senha<span class="req">*</span>
+            </label>
+            <div class="input-group">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-lock login_form_icons"></i></span>
+              <input name="senha" type="password"required autocomplete="off"/>
+            </div>
+          </div>
+
+          <div class="field-wrap">
+            <label>
+              Confirmar Senha<span class="req">*</span>
+            </label>
+            <div class="input-group">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-lock login_form_icons"></i></span>
+              <input type="password"required autocomplete="off"/>
+            </div>
+          </div>
+
+          <button type="submit" class="button button-block"><span class="glyphicon glyphicon-share-alt"></span> Cadastrar</button>
+
+        </form>
+
+      </div>
+
+    </div><!-- tab-content -->
+
+  </div> <!-- /form -->
+
+  <div id="footer">
+    <p>Connect Facens. Copyright © 2017 All Rights are Reserved.</a></p>
+  </div>
+
+  <script src="lib/bootstrap2/js/jquery.min.js"></script>
+
+  <script src="lib/index.js"></script>
 
 
 
