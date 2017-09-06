@@ -13,7 +13,7 @@ $objDb = new db();
 $link = $objDb->conecta_mysql();
 
 
-$sql = " SELECT DATE_FORMAT(t.data_inclusao, '%d %b %Y') AS data_inclusao, t.post, u.usuario,t.titulo FROM post AS t JOIN usuarios AS u ON (t.id_usuario = u.id) ORDER BY data_inclusao ASC";
+$sql = " SELECT DATE_FORMAT(t.data_inclusao, '%d %b %Y') AS data_inclusao, t.post, u.usuario,t.titulo FROM post AS t JOIN usuarios AS u ON (t.id_usuario = u.id) ORDER BY data_inclusao DESC";
 
 $resultado = mysqli_query($link,$sql);
 
