@@ -19,6 +19,7 @@ if(!isset($_SESSION['usuario'])){
 	
 	<script src="lib/bootstrap2/js/jquery.min.js"></script>
 	<script src="lib/bootstrap2/js/bootstrap.min.js"></script>
+	<script src="lib/post_script.js"></script>
 	
 	
 	<link href="lib/fa/css/font-awesome.min.css" rel="stylesheet">
@@ -141,6 +142,10 @@ if(!isset($_SESSION['usuario'])){
 										</div>
 									</div>
 								</div>
+
+								<div id="posts" >
+								
+								</div>
 							</div>
 						</div>
 					</div>
@@ -162,13 +167,14 @@ if(!isset($_SESSION['usuario'])){
 						<h4 class="modal-title">Adicionar Postagem</h4>
 					</div>
 					<div class="modal-body">
-						<input type="text" placeholder="Titulo" name="name">
+
+						<input id="titulo_post" type="text" placeholder="Titulo" name="name">
 											
-						<textarea placeholder="Descrição"></textarea>
+						<textarea id="texto_post" style="resize: none;" placeholder="Descrição"></textarea>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="cancel" data-dismiss="modal">Fechar</button>
-						<button type="button" class="add-project" data-dismiss="modal">Postar</button>
+						<button type="button" id="btn_post" class="add-project" data-dismiss="modal">Postar</button>
 					</div>
 				</div>
 
