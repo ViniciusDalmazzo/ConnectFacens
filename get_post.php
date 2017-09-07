@@ -20,8 +20,8 @@ $resultado = mysqli_query($link,$sql);
 if($resultado){
 
 	while($registro = mysqli_fetch_array($resultado,MYSQLI_ASSOC)){
-		echo '<a href="#" class="list-group-item">';
-		echo '<h4 class="list-group-item-heading">'.$registro['usuario'].' <small> - '.$registro['data_inclusao'].'</small></h4>';
+		echo '<a href="#" class="list-group-item btn_comment ">';
+		echo '<h4 class="list-group-item-heading ">'.$registro['usuario'].' <small class="pull-right"> '.$registro['data_inclusao'].'</small></h4>';
 		echo '<h5><b>'.$registro['titulo'].'</b></h5>';
 		echo '<p class="list-group-item-text">'.$registro['post'].'</p>';
 		echo '</a>';

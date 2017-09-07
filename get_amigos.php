@@ -13,7 +13,8 @@ $objDb = new db();
 $link = $objDb->conecta_mysql();
 
 
-$sql = " SELECT u.id,u.usuario,a.id_usuario,a.id_amigo,a.data_amizade FROM usuarios AS u JOIN amizade AS a ON (u.id = a.id_amigo)";
+
+$sql = " SELECT u.id,u.usuario,a.id_usuario,a.id_amigo,a.data_amizade FROM usuarios AS u JOIN amizade AS a ON (u.id = a.id_amigo) WHERE $id_usuario = a.id_usuario ";
 
 $resultado_id = mysqli_query($link,$sql);
 
@@ -23,7 +24,7 @@ if($resultado_id){
 
 			echo '<div style="height: 55px;"';
 			echo '<a href="#" class="list-group-item">';
-			echo '<strong>'.$registro['usuario'].'</strong><button type="button" data-id_usuario="'.$registro['id'].'" class="btn btn_desfazer btn-primary pull-right">Desfazer Amizade</button>';
+			echo '<strong>'.$registro['usuario'].'</strong><button type="button" data-id_usuario_desfazer="'.$registro['id'].'" class="btn btn_desfazer btn-primary pull-right">Excluir</button>';
 			echo '</a></div>';
 		
 	}

@@ -20,6 +20,7 @@ if(!isset($_SESSION['usuario'])){
 	<script src="lib/bootstrap2/js/jquery.min.js"></script>
 	<script src="lib/bootstrap2/js/bootstrap.min.js"></script>
 	<script src="lib/amigos_script.js"></script>
+	<script src="lib/notificao_script.js"></script>
 	
 	
 	<link href="lib/fa/css/font-awesome.min.css" rel="stylesheet">
@@ -27,6 +28,7 @@ if(!isset($_SESSION['usuario'])){
 	<link rel="stylesheet" href="lib/bootstrap/css/bootstrap.css">
 	<link rel="stylesheet" href="lib/body.css">
 	<link rel="stylesheet" href="lib/home_css.css">
+
 	
 </head>
 
@@ -76,13 +78,25 @@ if(!isset($_SESSION['usuario'])){
 							<div class="header-rightside">
 								<ul class="list-inline header-top pull-right">
 									<li class="hidden-xs"><a href="#" class="add-project" data-toggle="modal" data-target="#add_project">Adicionar Postagem</a></li>
-									<li><a href="#"><i class="fa fa-envelope" aria-hidden="true"></i></a></li>
-									<li>
-										<a href="#" class="icon-info">
+									<li class="dropdown">
+										<a href="#" class="dropdown-toggle icon-info" data-toggle="dropdown">
+
 											<i class="fa fa-bell" aria-hidden="true"></i>
-											<span class="label label-primary">3</span>
+											<span class="label label-primary">1	</span>
 										</a>
+										<ul class="dropdown-menu" style="height: 350px;width: 240px;overflow: auto;">
+											<li>
+												<div id="notificacao">
+
+												
+
+													
+												</div>
+											</li>
+										</ul>
 									</li>
+									<li><a href="#"><i class="fa fa-envelope" aria-hidden="true"></i></a></li>								
+									
 									<li class="dropdown">
 										<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="http://jskrishna.com/work/merkury/images/user-pic.jpg">
 											<?php echo $_SESSION['usuario']; ?>

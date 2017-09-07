@@ -20,6 +20,7 @@ if(!isset($_SESSION['usuario'])){
 	<script src="lib/bootstrap2/js/jquery.min.js"></script>
 	<script src="lib/bootstrap2/js/bootstrap.min.js"></script>
 	<script src="lib/post_script.js"></script>
+	<script src="lib/notificao_script.js"></script>
 	
 	
 	<link href="lib/fa/css/font-awesome.min.css" rel="stylesheet">
@@ -75,13 +76,25 @@ if(!isset($_SESSION['usuario'])){
 							<div class="header-rightside">
 								<ul class="list-inline header-top pull-right">
 									<li class="hidden-xs"><a href="#" class="add-project" data-toggle="modal" data-target="#add_project">Adicionar Postagem</a></li>
-									<li><a href="#"><i class="fa fa-envelope" aria-hidden="true"></i></a></li>
-									<li>
-										<a href="#" class="icon-info">
+									<li class="dropdown">
+										<a href="#" class="dropdown-toggle icon-info" data-toggle="dropdown">
+
 											<i class="fa fa-bell" aria-hidden="true"></i>
 											<span class="label label-primary">3</span>
 										</a>
+										<ul class="dropdown-menu" style="height: 350px;width: 240px;overflow: auto;">
+											<li>
+												<div id="notificacao">
+
+												
+
+													
+												</div>
+											</li>
+										</ul>
 									</li>
+									<li><a href="#"><i class="fa fa-envelope" aria-hidden="true"></i></a></li>								
+									
 									<li class="dropdown">
 										<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="http://jskrishna.com/work/merkury/images/user-pic.jpg">
 											<?php echo $_SESSION['usuario']; ?>
@@ -109,10 +122,10 @@ if(!isset($_SESSION['usuario'])){
 						<h1>Seja bem vindo, <?php echo $_SESSION['usuario']; ?></h1>
 						<div class="container">
 
-							<div class="sales report">
+							<div class="sales report ">
 								<h2>Postagens</h2>
 								<div class="btn-group">									
-										
+
 									<button class="btn btn-secondary btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
 										<span>Filtrar:</span>Tudo
@@ -129,7 +142,7 @@ if(!isset($_SESSION['usuario'])){
 
 							</div>
 
-							
+
 						</div>
 					</div>
 				</div>
@@ -152,10 +165,12 @@ if(!isset($_SESSION['usuario'])){
 					<div class="modal-body">
 
 						<input id="titulo_post" type="text" placeholder="Titulo" name="name">
-						
+
 						<textarea id="texto_post" style="resize: none;" placeholder="Descrição"></textarea>
 					</div>
 					<div class="modal-footer">
+						
+						<input type="file" id="imagem_post" name="imagem"/>	
 						<button type="button" class="cancel" data-dismiss="modal">Fechar</button>
 						<button type="button" id="btn_post" class="add-project" data-dismiss="modal">Postar</button>
 					</div>
@@ -163,7 +178,7 @@ if(!isset($_SESSION['usuario'])){
 
 			</div>
 		</div>
-		
+
 
 	</body>
 	</html>
