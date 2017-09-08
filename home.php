@@ -98,7 +98,7 @@ if(!isset($_SESSION['usuario'])){
 												$link = $objDb->conecta_mysql();
 
 
-												$count = mysqli_query($link," SELECT COUNT(id_usuario) as total FROM convite where id_amigo = $id_usuario");
+												$count = mysqli_query($link," SELECT COUNT(id_usuario) as total FROM convite where id_amigo	 = $id_usuario");
 
 												$c = mysqli_fetch_array($count);					
 

@@ -20,6 +20,7 @@ if(!isset($_SESSION['usuario'])){
   <script src="lib/bootstrap2/js/jquery.min.js"></script>
   <script src="lib/bootstrap2/js/bootstrap.min.js"></script>
   <script src="lib/post_script.js"></script>
+  <script src="lib/notificao_script.js"></script>
   
   
   <link href="lib/fa/css/font-awesome.min.css" rel="stylesheet">
@@ -97,7 +98,7 @@ if(!isset($_SESSION['usuario'])){
                         $link = $objDb->conecta_mysql();
 
 
-                        $count = mysqli_query($link," SELECT COUNT(id_usuario) as total FROM convite where id_usuario = $id_usuario");
+                        $count = mysqli_query($link," SELECT COUNT(id_usuario) as total FROM convite where id_amigo = $id_usuario");
 
                         $c = mysqli_fetch_array($count);          
 
