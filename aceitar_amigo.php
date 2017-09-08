@@ -23,8 +23,16 @@ $sql = " INSERT INTO amizade (id_usuario,id_amigo)values($id_usuario,$id_amigo) 
 
 mysqli_query($link,$sql);
 
+$sql = " INSERT INTO amizade (id_amigo,id_usuario)values($id_usuario,$id_amigo) ";
+
+
+mysqli_query($link,$sql);
+
 $sql = " DELETE FROM convite WHERE id_usuario = $id_amigo AND id_amigo = $id_usuario";
 
+mysqli_query($link,$sql);
+
+$sql = " DELETE FROM convite WHERE id_usuario = $id_usuario AND id_amigo = $id_amigo";
 
 mysqli_query($link,$sql);
 
