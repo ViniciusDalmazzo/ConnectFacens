@@ -29,5 +29,43 @@ if($resultado){
 	echo 'Erro na consulta';
 }
 
+$sql = "SELECT * FROM usuarios AS u JOIN resposta_convite AS c on (u.id = c.id_usuario) where $id_usuario = c.id_amigo and c.resposta = 1";
+
+$resultado = mysqli_query($link,$sql);
+
+if($resultado){
+
+	while($registro = mysqli_fetch_array($resultado,MYSQLI_ASSOC)){
+		echo '<a href="#" class="btn_comment list-group-item">';
+		echo '<h5><p><b>' .$registro['usuario'].  '&nbsp;</b>aceitou o seu pedido de amizade.</p></h5>';
+		echo '<button type="button" data-id_usuario="'.$registro['id'].'" class="btn btn-info btn_ok">Ok</button>';	
+		echo '</a>';
+	}
+
+}else{
+	echo 'Erro na consulta';
+}
+
+$sql = "SELECT * FROM usuarios AS u JOIN resposta_convite AS c on (u.id = c.id_usuario) where $id_usuario = c.id_amigo and c.resposta = 0";
+
+$resultado = mysqli_query($link,$sql);
+
+if($resultado){
+
+	while($registro = mysqli_fetch_array($resultado,MYSQLI_ASSOC)){
+		echo '<a href="#" class="btn_comment list-group-item">';
+		echo '<h5><p><b>' .$registro['usuario'].  '&nbsp;</b>recusou o seu pedido de amizade.</p></h5>';
+		echo '<button type="button" data-id_usuario="'.$registro['id'].'" class="btn btn-info btn_ok">Ok</button>';	
+		echo '</a>';
+	}
+
+}else{
+	echo 'Erro na consulta';
+}
+
+
+
+
+
 
 ?>

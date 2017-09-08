@@ -32,11 +32,8 @@ if($resultado_id){
 			echo '</a></div>';
 		}
 
-		
 
-         $count++;
-	
-		
+         $count++;	
 
 		
 	}

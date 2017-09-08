@@ -22,5 +22,12 @@ $sql = " DELETE FROM convite WHERE id_usuario = $id_amigo AND id_amigo = $id_usu
 
 mysqli_query($link,$sql);
 
+$sql = " DELETE FROM convite WHERE id_usuario = $id_usuario AND id_amigo = $id_amigo";
+
+mysqli_query($link,$sql);
+
+$sql = " INSERT INTO resposta_convite (id_usuario,id_amigo,resposta)values($id_usuario,$id_amigo,0)";
+mysqli_query($link,$sql);
+
 
 ?>

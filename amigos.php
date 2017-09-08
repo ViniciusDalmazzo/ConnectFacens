@@ -48,13 +48,13 @@ if(!isset($_SESSION['usuario'])){
 						<li><a href="#"><i class="fa fa-bar-chart" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Estatisticas</span></a></li>
 						<li class="active"><a href="amigos.php"><i class="fa fa-user" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Amigos</span></a></li>
 						<li><a href="#"><i class="fa fa-calendar" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Calendario</span></a></li>
-						<li><a href="#"><i class="fa fa-cog" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Configurações</span></a></li>
+						<li><a href="#"><i class="fa fa-cog" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Configuração</span></a></li>
+						<li><a href="ver_perfil.php"><i class="fa fa-user" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Meu Perfil</span></a></li>
 						
 
 					</ul>
 				</div>
 			</div>
-
 			<div class="col-md-10 col-sm-11 display-table-cell v-align" id="body-home">
 				<!--<button type="button" class="slide-toggle">Slide Toggle</button> -->
 				<div class="row">
@@ -82,13 +82,50 @@ if(!isset($_SESSION['usuario'])){
 										<a href="#" class="dropdown-toggle icon-info" data-toggle="dropdown">
 
 											<i class="fa fa-bell" aria-hidden="true"></i>
-											<span class="label label-primary">1	</span>
+											<span class="label label-primary">
+												<?php 
+												
+
+												if(!isset($_SESSION['usuario'])){
+													header('Location: index.php?erro=1');
+												}
+
+												require_once('db.class.php');
+
+												$count =0;
+
+												$id_usuario = $_SESSION['id_usuario'];
+												$objDb = new db();
+												$link = $objDb->conecta_mysql();
+
+
+												$count = mysqli_query($link," SELECT COUNT(id_usuario) as total FROM convite where id_usuario = $id_usuario");
+
+												$c = mysqli_fetch_array($count);					
+
+
+
+												$count = mysqli_query($link," SELECT COUNT(id_usuario) as total FROM resposta_convite where id_amigo = $id_usuario");
+
+												$c2 = mysqli_fetch_array($count);
+
+												$count = $c['total'] + $c2['total'] ;
+
+												echo $count;
+
+
+
+
+
+
+												?>
+											</span>
 										</a>
 										<ul class="dropdown-menu" style="height: 350px;width: 240px;overflow: auto;">
 											<li>
 												<div id="notificacao">
 
-												
+
 
 													
 												</div>
