@@ -14,7 +14,7 @@ $link = $objDb->conecta_mysql();
 
 
 
-$sql = " SELECT u.id,u.usuario,a.id_usuario,a.id_amigo,a.data_amizade FROM usuarios AS u JOIN amizade AS a ON (u.id = a.id_amigo) WHERE $id_usuario = a.id_usuario ";
+$sql = " SELECT * FROM usuarios AS u JOIN amizade AS a ON ((u.id = a.id_usuario or u.id = a.id_amigo) and (a.id_amigo = $id_usuario or a.id_usuario = $id_usuario)) where id <> $id_usuario";
 
 $resultado_id = mysqli_query($link,$sql);
 

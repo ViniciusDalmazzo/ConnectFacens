@@ -13,7 +13,7 @@ $objDb = new db();
 $link = $objDb->conecta_mysql();
 
 
-$sql = " Select * from usuarios as u join convite c on (u.id = c.id_amigo) where id not in ( select b.id_amigo from amizade as b inner join usuarios as a on b.id_usuario = a.id where b.id_usuario = $id_usuario) AND $id_usuario <> id ";
+$sql = " Select * from (Select * from usuarios where id NOT IN (select id_usuario From amizade where id_usuario = $id_usuario )) teste where id IN (Select id from usuarios where id IN (Select id_amigo from convite where id_usuario = $id_usuario )) ";
 
 $resultado_id = mysqli_query($link,$sql);
 
@@ -34,7 +34,7 @@ if($resultado_id){
 
 
 
-$sql = " Select * from usuarios where id not in ( select b.id_amigo from amizade as b inner join usuarios as a on b.id_usuario = a.id where b.id_usuario = $id_usuario) AND id not in (Select u.id from usuarios as u join convite c on (u.id = c.id_amigo) where id not in ( select b.id_amigo from amizade as b inner join usuarios as a on b.id_usuario = a.id where b.id_usuario = $id_usuario) AND $id_usuario <> id  ) AND $id_usuario <> id ";
+$sql = " SELECT * FROM usuarios where id not  IN (SELECT id_amigo FROM amizade where id_usuario = $id_usuario UNION SELECT id_amigo FROM convite WHERE id_usuario = $id_usuario) AND id <> $id_usuario";
 
 $resultado_id = mysqli_query($link,$sql);
 

@@ -21,7 +21,7 @@ if($resultado){
 	while($registro = mysqli_fetch_array($resultado,MYSQLI_ASSOC)){
 		echo '<a href="#" class="btn_comment list-group-item">';
 		echo '<h5><p><b>' .$registro['usuario'].  '&nbsp;</b>enviou pedido de amizade</p></h5>';
-		echo '<button type="button" data-id_usuario="'.$registro['id'].'" class="btn btn-success btn_aceita_convite">Aceitar</button>&nbsp;<button type="button" class="btn btn-danger btn_recusa_convite">Recusar</button>'	;	
+		echo '<button type="button" data-id_usuario="'.$registro['id'].'" class="btn btn-success btn_aceita_convite">Aceitar</button>&nbsp;<button type="button" data-id_usuario_recusa="'.$registro['id'].'" class="btn btn-danger btn_recusa_convite">Recusar</button>';	
 		echo '</a>';
 	}
 

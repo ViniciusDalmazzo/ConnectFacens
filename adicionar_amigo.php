@@ -36,7 +36,11 @@ if($resultado_id){
 	echo 'Erro na consulta';
 }
 
-$sql = " INSERT INTO convite (id_usuario,id_amigo)values($id_usuario,$seguir_id_usuario) ";
+$sql = " INSERT INTO convite (id_usuario,id_amigo)values($id_usuario,$seguir_id_usuario)";
+
+
+mysqli_query($link,$sql);
+$sql = " INSERT INTO convite (id_usuario,id_amigo)values($seguir_id_usuario,$id_usuario)";
 
 
 mysqli_query($link,$sql);
