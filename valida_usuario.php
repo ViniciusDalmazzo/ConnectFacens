@@ -10,7 +10,7 @@ $link = $objDb->conecta_mysql();
 $sql = " SELECT id,usuario,email FROM usuarios WHERE usuario = '$usuario' AND senha = '$senha'";
 $retorno_select = mysqli_query($link,$sql);
 
-$sql2 = "SELECT * FROM usuarios as u INNER JOIN perfil AS P ON (u.id = p.id_usuario) WHERE u.usuario = '$usuario'";
+$sql2 = "SELECT * FROM usuarios as u INNER JOIN perfil AS p ON (u.id = p.id_usuario) WHERE u.usuario = '$usuario'";
 $retorno_select2 = mysqli_query($link,$sql2);
 
 if($retorno_select){

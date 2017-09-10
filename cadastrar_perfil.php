@@ -212,7 +212,7 @@ if(!isset($_SESSION['usuario'])){
                        $objDb = new db();
                        $link = $objDb->conecta_mysql();
 
-                       $sql = "SELECT * FROM pais order by SL_NOME_PT ASC";
+                       $sql = "SELECT * FROM pais";
 
                        $resultado = mysqli_query($link,$sql);
 

@@ -1,21 +1,14 @@
 <?php 
-
 require_once('db.class.php');
 session_start();
-
 $usuario = $_SESSION['usuario'];
-
 if(!isset($_SESSION['usuario'])){
 	header('Location: index.php?erro=1');
 }
-
-
 $objDb = new db();
 $link = $objDb->conecta_mysql();
-
 $sql = "SELECT * FROM usuarios as u INNER JOIN perfil AS P ON (u.id = p.id_usuario) WHERE u.usuario = '$usuario'";
 $retorno_select = mysqli_query($link,$sql);
-
 if($retorno_select){	
     
     $dados_perfil = mysqli_fetch_array($retorno_select);    
@@ -25,7 +18,6 @@ if($retorno_select){
     }
     
 }
-
 ?>
 
 <!DOCTYPE HTML>
@@ -103,39 +95,20 @@ if($retorno_select){
 											<span class="label label-primary">
 												<?php 
 												
-
 												if(!isset($_SESSION['usuario'])){
 													header('Location: index.php?erro=1');
 												}
-
 												require_once('db.class.php');
-
 												$count =0;
-
 												$id_usuario = $_SESSION['id_usuario'];
 												$objDb = new db();
 												$link = $objDb->conecta_mysql();
-
-
 												$count = mysqli_query($link," SELECT COUNT(id_usuario) as total FROM convite where id_amigo	 = $id_usuario");
-
 												$c = mysqli_fetch_array($count);					
-
-
-
 												$count = mysqli_query($link," SELECT COUNT(id_usuario) as total FROM resposta_convite where id_amigo = $id_usuario");
-
 												$c2 = mysqli_fetch_array($count);
-
 												$count = $c['total'] + $c2['total'] ;
-
 												echo $count;
-
-
-
-
-
-
 												?>
 											</span>
 										</a>

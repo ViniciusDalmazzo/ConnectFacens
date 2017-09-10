@@ -23,7 +23,7 @@ if($resultado_id){
 
 			echo '<div style="height: 55px;"';
 			echo '<a href="#" class="list-group-item">';
-			echo '<strong>'.$registro['usuario'].'</strong><button style="pointer-events:none;outline:none;background-color:green;"data-id_usuario="'.$registro['id'].'" type="button" class="btn btn_seguir btn-primary pull-right">Convite Enviado</button>';
+			echo '<strong><a href="ver_perfil_usuario.php?user='.$registro['id'].'">'.$registro['usuario'].'</a></strong><button style="pointer-events:none;outline:none;background-color:green;"data-id_usuario="'.$registro['id'].'" type="button" class="btn btn_seguir btn-primary pull-right">Convite Enviado</button>';
 			echo '</a></div>';
 
 	}
@@ -44,7 +44,7 @@ if($resultado_id){
 
 			echo '<div style="height: 55px;"';
 			echo '<a href="#" class="list-group-item">';
-			echo '<strong>'.$registro['usuario'].'</strong><button data-id_usuario="'.$registro['id'].'" type="button" class="btn btn_seguir btn-primary pull-right">Adicionar</button>';
+			echo '<strong><a href="ver_perfil_usuario.php?user='.$registro['id'].'">'.$registro['usuario'].'</a></strong><button data-id_usuario="'.$registro['id'].'" type="button" class="btn btn_seguir btn-primary pull-right">Adicionar</button>';
 			echo '</a></div>';
 
 	}

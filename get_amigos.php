@@ -28,7 +28,7 @@ if($resultado_id){
 		if(MOD($count,2)==0){
 			echo '<div style="height: 55px;"';
 			echo '<a href="#" class="list-group-item">';
-			echo '<strong>'.$registro['usuario'].'</strong><button type="button" data-id_usuario_desfazer="'.$registro['id'].'" class="btn btn_desfazer btn-primary pull-right">Excluir</button>';
+			echo '<strong><a href="ver_perfil_usuario.php?user='.$registro['id'].'">'.$registro['usuario'].'<a></strong><button type="button" data-id_usuario_desfazer="'.$registro['id'].'" class="btn btn_desfazer btn-primary pull-right">Excluir</button>';
 			echo '</a></div>';
 		}
 

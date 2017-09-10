@@ -9,11 +9,10 @@ if(!isset($_SESSION['usuario'])){
   header('Location: index.php?erro=1');
 }
 
-
 $objDb = new db();
 $link = $objDb->conecta_mysql();
 
-$sql = "SELECT * FROM usuarios as u INNER JOIN perfil AS P ON (u.id = p.id_usuario) WHERE u.usuario = '$usuario'";
+$sql = "SELECT * FROM usuarios as u INNER JOIN perfil AS p ON (u.id = p.id_usuario) WHERE u.usuario = '$usuario'";
 $retorno_select = mysqli_query($link,$sql);
 
 if($retorno_select){  
@@ -232,7 +231,7 @@ if($retorno_select){
                        $objDb = new db();
                        $link = $objDb->conecta_mysql();
 
-                       $sql = "SELECT * FROM pais order by SL_NOME_PT ASC";
+                       $sql = "SELECT * FROM pais";
 
                        $resultado = mysqli_query($link,$sql);
 
