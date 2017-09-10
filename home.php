@@ -183,6 +183,7 @@ if($retorno_select){
 
 
 		<!-- Modal -->
+		
 		<div id="add_project" class="modal fade" role="dialog">
 			<div class="modal-dialog">
 
@@ -192,22 +193,28 @@ if($retorno_select){
 						<button type="button" class="close" data-dismiss="modal">×</button>
 						<h4 class="modal-title">Adicionar Postagem</h4>
 					</div>
+					<form method="POST" id="form_post" enctype="multipart/form-data">
 					<div class="modal-body">
 
-						<input id="titulo_post" type="text" placeholder="Titulo" name="name">
+					
 
-						<textarea id="texto_post" style="resize: none;" placeholder="Descrição"></textarea>
+						<input id="titulo_post" type="text" placeholder="Titulo" id="titulo_post" name="titulo_post">
+
+						<textarea id="texto_post" id="texto_post" name="texto_post" style="resize: none;" placeholder="Descrição"></textarea>
+						<input type="file" id="imagem" name="imagem"/>	
 					</div>
-					<div class="modal-footer">
+					<div class="modal-footer">					
 						
-						<input type="file" id="imagem_post" name="imagem"/>	
 						<button type="button" class="cancel" data-dismiss="modal">Fechar</button>
-						<button type="button" id="btn_post" class="add-project" data-dismiss="modal">Postar</button>
+						<button type="submit" id="btn_post" class="add-project" data-dismiss="modal">Postar</button>
+
 					</div>
+					</form>
 				</div>
 
 			</div>
 		</div>
+		
 
 
 	</body>

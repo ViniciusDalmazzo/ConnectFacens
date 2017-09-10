@@ -196,9 +196,8 @@ if($retorno_select){
                      <div class="col-sm-6">
                        <div  align="center"> <img alt="User Pic" src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg" id="profile-image1" class="img-circle img-responsive"> 
 
-                        <input id="profile-image-upload" class="hidden" type="file">
-                        <div style="color:#999;" >Clique para alterar foto</div>
-                        <!--Upload Image Js And Css-->
+                        <div id="profile-image-upload" >  </div>                      
+                        
 
                         <style type="text/css">
                           input.hidden {

@@ -16,13 +16,13 @@ $sql = "SELECT * FROM usuarios as u INNER JOIN perfil AS p ON (u.id = p.id_usuar
 $retorno_select = mysqli_query($link,$sql);
 
 if($retorno_select){  
-    
-    $dados_perfil = mysqli_fetch_array($retorno_select);    
-    
-    if(!isset($dados_perfil['usuario'])){      
-        header('Location: cadastrar_perfil.php');
-    }
-    
+
+  $dados_perfil = mysqli_fetch_array($retorno_select);    
+
+  if(!isset($dados_perfil['usuario'])){      
+    header('Location: cadastrar_perfil.php');
+  }
+
 }
 
 
@@ -187,8 +187,11 @@ if($retorno_select){
                   <img alt="User Pic" src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg" id="profile-image1" class="img-circle img-responsive"> 
 
                   <h6>Clique para mudar a foto do perfil</h6>
+                  <form method="POST" class="form-horizontal">
+                     <input id="profile-image-upload" type="file">
+                    <input type="submit" name="btn_img_perfil">
+                  </form>
 
-                  <input type="file" class="form-control">
                 </div>
               </div>
 
@@ -348,7 +351,7 @@ if($retorno_select){
           <div class="form-group">
             <label class="col-md-3 control-label">Semestre:</label>
             <div class="col-md-8">
-            <select required id="semestre" class="form-control" name="Semestre"> 
+              <select required id="semestre" class="form-control" name="Semestre"> 
                <option disabled selected value="">Selecione o seu semestre</option>                     
                <?php 
                require_once("db.class.php");          
