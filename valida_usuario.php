@@ -10,17 +10,29 @@ $link = $objDb->conecta_mysql();
 $sql = " SELECT id,usuario,email FROM usuarios WHERE usuario = '$usuario' AND senha = '$senha'";
 $retorno_select = mysqli_query($link,$sql);
 
+$sql2 = "SELECT * FROM usuarios as u INNER JOIN perfil AS P ON (u.id = p.id_usuario) WHERE u.usuario = '$usuario'";
+$retorno_select2 = mysqli_query($link,$sql2);
+
 if($retorno_select){
 	
     $dados_usuario = mysqli_fetch_array($retorno_select);
-   
-    if(isset($dados_usuario['usuario'])){
+    $dados_perfil = mysqli_fetch_array($retorno_select2);    
+    
+    if(!isset($dados_perfil['usuario'])){
+
+        $_SESSION['id_usuario'] = $dados_usuario['id'];
+        $_SESSION['usuario'] = $dados_usuario['usuario'];
+        $_SESSION['email'] = $dados_usuario['email'];        
+        header('Location: cadastrar_perfil.php');
+
+    }
+    else if(isset($dados_usuario['usuario'])){
 
         $_SESSION['id_usuario'] = $dados_usuario['id'];
         $_SESSION['usuario'] = $dados_usuario['usuario'];
         $_SESSION['email'] = $dados_usuario['email'];        
         header('Location: home.php');
-        
+
     }else{
         header('Location: index.php?erro=1');       
     }

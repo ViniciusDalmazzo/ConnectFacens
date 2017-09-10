@@ -21,11 +21,11 @@ $semestre = $_POST['Semestre'];
 $objDb = new db();
 $link = $objDb->conecta_mysql();
 
-$sql = " insert into perfil(id_usuario,nome, sobrenome, data_nascimento,id_pais,id_estado,id_cidade,genero,id_curso,id_semestre) values ($id_usuario,'$nome', '$sobrenome', '$dataNasc',  $pais, $estado, $cidade, '$genero', $curso, $semestre)";
+$sql = " update perfil set nome ='$nome', sobrenome = '$sobrenome',  data_nascimento = '$dataNasc', id_pais = $pais, id_estado = $estado, id_cidade = $cidade, genero = '$genero',  id_curso = $curso,  id_semestre = $semestre where id_usuario = $id_usuario";
 
 
 if(mysqli_query($link, $sql)){
-	header('Location: home.php');	
+	header('Location: ver_perfil.php');	
 }else{
 	echo 'Erro ao registrar o Perfil';
 }

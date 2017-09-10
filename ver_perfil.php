@@ -1,9 +1,31 @@
 <?php 
 
+require_once('db.class.php');
 session_start();
+
+$usuario = $_SESSION['usuario'];
 
 if(!isset($_SESSION['usuario'])){
   header('Location: index.php?erro=1');
+}
+
+
+$objDb = new db();
+$link = $objDb->conecta_mysql();
+
+$sql = "SELECT * FROM usuarios as u INNER JOIN perfil AS P ON (u.id = p.id_usuario) WHERE u.usuario = '$usuario'";
+$retorno_select = mysqli_query($link,$sql);
+
+if($retorno_select){  
+    
+    $dados_perfil = mysqli_fetch_array($retorno_select);    
+    
+    if(!isset($dados_perfil['usuario'])){      
+        header('Location: cadastrar_perfil.php');
+    }
+    
+}else{
+    echo 'Erro na consulta com o banco de dados!';
 }
 
 
@@ -126,7 +148,7 @@ if(!isset($_SESSION['usuario'])){
 
 
 
-                          
+
                         </div>
                       </li>
                     </ul>
@@ -198,128 +220,346 @@ if(!isset($_SESSION['usuario'])){
 
                             .button {
 
-                               border-top: 1px solid #42b850;
-                               background: #65d69a;
-                               background: -webkit-gradient(linear, left top, left bottom, from(#3e9c54), to(#65d69a));
-                               background: -webkit-linear-gradient(top, #3e9c54, #65d69a);
-                               background: -moz-linear-gradient(top, #3e9c54, #65d69a);
-                               background: -ms-linear-gradient(top, #3e9c54, #65d69a);
-                               background: -o-linear-gradient(top, #3e9c54, #65d69a);
-                               padding: 5px 10px;
-                               -webkit-border-radius: 30px;
-                               -moz-border-radius: 30px;
-                               border-radius: 30px;
-                               -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
-                               -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
-                               box-shadow: rgba(0,0,0,1) 0 1px 0;
-                               text-shadow: rgba(0,0,0,.4) 0 1px 0;
-                               color: white;
-                               font-size: 14px;
-                               font-family: 'Lucida Grande', Helvetica, Arial, Sans-Serif;
-                               text-decoration: none;
-                               vertical-align: middle;
-                             }
-                            .button:hover {
-                              border-top-color: #199948;
-                              background: #199948;
-                              color: #ffffff;
-                             }
-                            .button:active {
-                              border-top-color: #1b5c22;
-                              background: #1b5c22;
-                             }
-                            
+                             border-top: 1px solid #42b850;
+                             background: #65d69a;
+                             background: -webkit-gradient(linear, left top, left bottom, from(#3e9c54), to(#65d69a));
+                             background: -webkit-linear-gradient(top, #3e9c54, #65d69a);
+                             background: -moz-linear-gradient(top, #3e9c54, #65d69a);
+                             background: -ms-linear-gradient(top, #3e9c54, #65d69a);
+                             background: -o-linear-gradient(top, #3e9c54, #65d69a);
+                             padding: 5px 10px;
+                             -webkit-border-radius: 30px;
+                             -moz-border-radius: 30px;
+                             border-radius: 30px;
+                             -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
+                             -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
+                             box-shadow: rgba(0,0,0,1) 0 1px 0;
+                             text-shadow: rgba(0,0,0,.4) 0 1px 0;
+                             color: white;
+                             font-size: 14px;
+                             font-family: 'Lucida Grande', Helvetica, Arial, Sans-Serif;
+                             text-decoration: none;
+                             vertical-align: middle;
+                           }
+                           .button:hover {
+                            border-top-color: #199948;
+                            background: #199948;
+                            color: #ffffff;
+                          }
+                          .button:active {
+                            border-top-color: #1b5c22;
+                            background: #1b5c22;
+                          }
 
 
-                          </style>   
+
+                        </style>   
 
 
-                        </div>
-
-                        <br>
-
-                        <!-- /input-group -->
                       </div>
-                      <div class="col-sm-6">
-                        <h4 style="color:#00b1b1;" id="nomeCompleto">Guilherme Augusto</h4></span>
-                        <span><p id="cursoCompleto">Engenharia da Computação</p></span>
-                       <div class="clearfix"></div>
+
+                      <br>
+
+                      <!-- /input-group -->
+                    </div>
+                    <div class="col-sm-6">
+                      <h4 style="color:#00b1b1;" id="nomeCompleto">
+                        <?php 
+                        require_once("db.class.php");                       
+                        $id_usuario = $_SESSION['id_usuario'];
+                        $objDb = new db();
+                        $link = $objDb->conecta_mysql();
+
+                        $sql = "SELECT nome,sobrenome FROM perfil WHERE id_usuario = $id_usuario";
+
+                        $resultado = mysqli_query($link,$sql);
+
+                        if($resultado){
+
+                          while($registro = mysqli_fetch_array($resultado,MYSQLI_ASSOC)){
+                            echo $registro['nome'].'   '.$registro['sobrenome'];
+                          }
+
+                        }else{
+                          echo 'Erro na consulta';
+                        }
+                        ?> 
+                      </h4></span>
+                      <span><p id="cursoCompleto">
+                        <?php 
+                        require_once("db.class.php");                       
+                        $id_usuario = $_SESSION['id_usuario'];
+                        $objDb = new db();
+                        $link = $objDb->conecta_mysql();
+
+                        $sql = "SELECT c.nome_curso FROM perfil as p JOIN curso as c on (c.id_curso = p.id_curso) WHERE p.id_usuario = $id_usuario";
+
+                        $resultado = mysqli_query($link,$sql);
+
+                        if($resultado){
+
+                          while($registro = mysqli_fetch_array($resultado,MYSQLI_ASSOC)){
+                            echo $registro['nome_curso'];
+                          }
+
+                        }else{
+                          echo 'Erro na consulta';
+                        }
+                        ?> 
+                      </p></span>
+                      <div class="clearfix"></div>
                       <div class="bot-border"></div>
                       <br>
                       <a href="editar_perfil.php" class="button">Editar perfil</a>
-            
-                      </div>
-                      <div class="clearfix"></div>
-                      <hr style="margin:5px 0 5px 0;">
 
-
-                      <div class="col-sm-5 col-xs-6 tital " >Nome:</div><div class="col-sm-7 col-xs-5 "><span id="nome">Augustinho</span></div>
-                      <div class="clearfix"></div>
-                      <div class="bot-border"></div>
-
-                      <div class="col-sm-5 col-xs-6 tital " >Sobrenome:</div><div class="col-sm-7"> <span id="sobrenome">Bueno</span></div>
-                      <div class="clearfix"></div>
-                      <div class="bot-border"></div>
-
-                      <div class="col-sm-5 col-xs-6 tital " >Data Nascimento:</div><div class="col-sm-7"><span id="dataNasc">21 Out 1997</span></div>
-                      <div class="clearfix"></div>
-                      <div class="bot-border"></div>
-
-                      <div class="col-sm-5 col-xs-6 tital ">Genêro:</div><div class="col-sm-7"><span id="genero">As vezes viado</span></div>
-
-                      <div class="clearfix"></div>
-                      <div class="bot-border"></div>
-
-                      <div class="col-sm-5 col-xs-6 tital ">País:</div><div class="col-sm-7"><span id="pais"></span>Brasil</div>
-
-                      <div class="clearfix"></div>
-                      <div class="bot-border"></div>
-
-                      <div class="col-sm-5 col-xs-6 tital " >Estado:</div><div class="col-sm-7"><span id="estado">São Paulo</span></div>
-
-                      <div class="clearfix"></div>
-                      <div class="bot-border"></div>
-
-                      <div class="col-sm-5 col-xs-6 tital " >Cidade:</div><div class="col-sm-7"><span id="cidade">Votorantim</span></div>
-
-                      <div class="clearfix"></div>
-                      <div class="bot-border"></div>
-
-                      <div class="col-sm-5 col-xs-6 tital " >Endereço:</div><div class="col-sm-7"><span id="end">Vila Nova</span></div>
-
-                      <div class="clearfix"></div>
-                      <div class="bot-border"></div>
-
-                      <div class="col-sm-5 col-xs-6 tital " >Curso:</div><div class="col-sm-7"><span id="idcurso">Engenharia da Computação</span></div>
-
-                      <div class="clearfix"></div>
-                      <div class="bot-border"></div>
-
-                      <div class="col-sm-5 col-xs-6 tital " >Semestre:</div><div class="col-sm-7"><span id="Semestre">6º Semestre</span></div>
-
-                      <!-- /.box-body -->
                     </div>
-                    <!-- /.box -->
-
-                  </div>
-
-
-                </div> 
-              </div>
-            </div>  
+                    <div class="clearfix"></div>
+                    <hr style="margin:5px 0 5px 0;">
 
 
-            <script>
-              $(function() {
-                $('#profile-image1').on('click', function() {
-                  $('#profile-image-upload').click();
-                });
-              });       
-            </script> 
+                    <div class="col-sm-5 col-xs-6 tital " >Nome:</div><div class="col-sm-7 col-xs-5 "><span id="nome">
+                    <?php 
+                    require_once("db.class.php");                       
+                    $id_usuario = $_SESSION['id_usuario'];
+                    $objDb = new db();
+                    $link = $objDb->conecta_mysql();
 
+                    $sql = "SELECT nome FROM perfil WHERE id_usuario = $id_usuario";
+
+                    $resultado = mysqli_query($link,$sql);
+
+                    if($resultado){
+
+                      while($registro = mysqli_fetch_array($resultado,MYSQLI_ASSOC)){
+                        echo $registro['nome'];
+                      }
+
+                    }else{
+                      echo 'Erro na consulta';
+                    }
+                    ?> 
+                  </span></div>
+                  <div class="clearfix"></div>
+                  <div class="bot-border"></div>
+
+                  <div class="col-sm-5 col-xs-6 tital " >Sobrenome:</div><div class="col-sm-7"> <span id="sobrenome"><?php 
+                  require_once("db.class.php");                       
+                  $id_usuario = $_SESSION['id_usuario'];
+                  $objDb = new db();
+                  $link = $objDb->conecta_mysql();
+
+                  $sql = "SELECT sobrenome FROM perfil WHERE id_usuario = $id_usuario";
+
+                  $resultado = mysqli_query($link,$sql);
+
+                  if($resultado){
+
+                    while($registro = mysqli_fetch_array($resultado,MYSQLI_ASSOC)){
+                      echo $registro['sobrenome'];
+                    }
+
+                  }else{
+                    echo 'Erro na consulta';
+                  }
+                  ?> </span></div>
+                  <div class="clearfix"></div>
+                  <div class="bot-border"></div>
+
+                  <div class="col-sm-5 col-xs-6 tital " >Data Nascimento:</div><div class="col-sm-7"><span id="dataNasc">
+                  <?php 
+                  require_once("db.class.php");                       
+                  $id_usuario = $_SESSION['id_usuario'];
+                  $objDb = new db();
+                  $link = $objDb->conecta_mysql();
+
+                  $sql = "SELECT data_nascimento FROM perfil WHERE id_usuario = $id_usuario";
+
+                  $resultado = mysqli_query($link,$sql);
+
+                  if($resultado){
+
+                    while($registro = mysqli_fetch_array($resultado,MYSQLI_ASSOC)){
+                      echo $registro['data_nascimento'];
+                    }
+
+                  }else{
+                    echo 'Erro na consulta';
+                  }
+                  ?> 
+                </span></div>
+                <div class="clearfix"></div>
+                <div class="bot-border"></div>
+
+                <div class="col-sm-5 col-xs-6 tital ">Genêro:</div><div class="col-sm-7"><span id="genero">
+                <?php 
+                require_once("db.class.php");                       
+                $id_usuario = $_SESSION['id_usuario'];
+                $objDb = new db();
+                $link = $objDb->conecta_mysql();
+
+                $sql = "SELECT genero FROM perfil WHERE id_usuario = $id_usuario";
+
+                $resultado = mysqli_query($link,$sql);
+
+                if($resultado){
+
+                  while($registro = mysqli_fetch_array($resultado,MYSQLI_ASSOC)){
+                    echo $registro['genero'];
+                  }
+
+                }else{
+                  echo 'Erro na consulta';
+                }
+                ?> 
+              </span></div>
+
+              <div class="clearfix"></div>
+              <div class="bot-border"></div>
+
+              <div class="col-sm-5 col-xs-6 tital ">País:</div><div class="col-sm-7"><span id="pais"></span>
+              <?php 
+              require_once("db.class.php");                       
+              $id_usuario = $_SESSION['id_usuario'];
+              $objDb = new db();
+              $link = $objDb->conecta_mysql();
+
+              $sql = "SELECT p.SL_NOME_PT FROM pais as p JOIN perfil as q on (q.id_pais = p.SL_ID) WHERE q.id_usuario = $id_usuario";
+
+              $resultado = mysqli_query($link,$sql);
+
+              if($resultado){
+
+                while($registro = mysqli_fetch_array($resultado,MYSQLI_ASSOC)){
+                  echo $registro['SL_NOME_PT'];
+                }
+
+              }else{
+                echo 'Erro na consulta';
+              }
+              ?> 
+            </div>
+
+            <div class="clearfix"></div>
+            <div class="bot-border"></div>
+
+            <div class="col-sm-5 col-xs-6 tital " >Estado:</div><div class="col-sm-7"><span id="estado">
+            <?php 
+              require_once("db.class.php");                       
+              $id_usuario = $_SESSION['id_usuario'];
+              $objDb = new db();
+              $link = $objDb->conecta_mysql();
+
+              $sql = "SELECT e.UF_NOME FROM estado as e JOIN perfil as p on (p.id_estado = e.UF_ID) WHERE p.id_usuario = $id_usuario";
+
+              $resultado = mysqli_query($link,$sql);
+
+              if($resultado){
+
+                while($registro = mysqli_fetch_array($resultado,MYSQLI_ASSOC)){
+                  echo $registro['UF_NOME'];
+                }
+
+              }else{
+                echo 'Erro na consulta';
+              }
+              ?> 
+              </span></div>
+
+            <div class="clearfix"></div>
+            <div class="bot-border"></div>
+
+            <div class="col-sm-5 col-xs-6 tital " >Cidade:</div><div class="col-sm-7"><span id="cidade"><?php 
+              require_once("db.class.php");                       
+              $id_usuario = $_SESSION['id_usuario'];
+              $objDb = new db();
+              $link = $objDb->conecta_mysql();
+
+              $sql = "SELECT c.CT_NOME FROM cidade as c JOIN perfil as p on (p.id_cidade = c.CT_ID) WHERE p.id_usuario = $id_usuario";
+
+              $resultado = mysqli_query($link,$sql);
+
+              if($resultado){
+
+                while($registro = mysqli_fetch_array($resultado,MYSQLI_ASSOC)){
+                  echo $registro['CT_NOME'];
+                }
+
+              }else{
+                echo 'Erro na consulta';
+              }
+              ?> </span></div>
+
+            <div class="clearfix"></div>
+            <div class="bot-border"></div>
+
+            <div class="col-sm-5 col-xs-6 tital " >Curso:</div><div class="col-sm-7"><span id="idcurso"><?php 
+                        require_once("db.class.php");                       
+                        $id_usuario = $_SESSION['id_usuario'];
+                        $objDb = new db();
+                        $link = $objDb->conecta_mysql();
+
+                        $sql = "SELECT c.nome_curso FROM perfil as p JOIN curso as c on (c.id_curso = p.id_curso) WHERE p.id_usuario = $id_usuario";
+
+                        $resultado = mysqli_query($link,$sql);
+
+                        if($resultado){
+
+                          while($registro = mysqli_fetch_array($resultado,MYSQLI_ASSOC)){
+                            echo $registro['nome_curso'];
+                          }
+
+                        }else{
+                          echo 'Erro na consulta';
+                        }
+                        ?> </span></div>
+
+            <div class="clearfix"></div>
+            <div class="bot-border"></div>
+
+            <div class="col-sm-5 col-xs-6 tital " >Semestre:</div><div class="col-sm-7"><span id="Semestre"><?php 
+                        require_once("db.class.php");                       
+                        $id_usuario = $_SESSION['id_usuario'];
+                        $objDb = new db();
+                        $link = $objDb->conecta_mysql();
+
+                        $sql = "SELECT s.semestre FROM perfil as p JOIN semestre as s on (s.id_semestre = p.id_semestre) WHERE p.id_usuario = $id_usuario";
+
+                        $resultado = mysqli_query($link,$sql);
+
+                        if($resultado){
+
+                          while($registro = mysqli_fetch_array($resultado,MYSQLI_ASSOC)){
+                            echo $registro['semestre'];
+                          }
+
+                        }else{
+                          echo 'Erro na consulta';
+                        }
+                        ?> </span></div>
+
+            <!-- /.box-body -->
           </div>
+          <!-- /.box -->
+
         </div>
 
 
-      </body>
-      </html>
+      </div> 
+    </div>
+  </div>  
+
+
+  <script>
+    $(function() {
+      $('#profile-image1').on('click', function() {
+        $('#profile-image-upload').click();
+      });
+    });       
+  </script> 
+
+</div>
+</div>
+
+
+</body>
+</html>

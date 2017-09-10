@@ -159,7 +159,7 @@ if(!isset($_SESSION['usuario'])){
 
 
           <div class="container">
-            <h1>Editar Perfil</h1>
+            <h1>Por favor, Cadastre o seu Perfil</h1>
             <hr>
             <div class="row">
               <!-- left column -->
@@ -178,11 +178,11 @@ if(!isset($_SESSION['usuario'])){
                 <div class="alert alert-info alert-dismissable">
 
                   <i class="fa fa-user-o"></i>
-                  Edite o seu <strong>perfil</strong> alterando os campos abaixo.
+                  Cadastre o seu <strong>perfil</strong> alterando os campos abaixo.
                 </div>
                 <h3>Informações</h3>
 
-                <form class="form-horizontal" role="form" action="salva_edita_perfil.php" method="POST">
+                <form class="form-horizontal" role="form" action="salva_perfil.php" method="POST">
                   <div class="form-group">
                     <label class="col-lg-3 control-label">Nome:</label>
                     <div class="col-lg-8">
@@ -205,7 +205,7 @@ if(!isset($_SESSION['usuario'])){
                     <label class="col-lg-3 control-label">País:</label>
                     <div class="col-lg-8">
                       <select required id="pais" class="form-control" name="Pais">  
-                       <option disabled selected value="">Selecione o seu país</option>                
+                       <option disabled selected value="">Selecione o seu país</option>                    
                        <?php 
                        require_once("db.class.php");                       
                        $id_usuario = $_SESSION['id_usuario'];
@@ -356,7 +356,7 @@ if(!isset($_SESSION['usuario'])){
         <div class="form-group">
           <label class="col-md-3 control-label"></label>
           <div class="col-md-8">
-            <button type="submit" class="btn btn-info">Salvar</button>
+            <button type="submit" class="btn btn-info">Cadastrar</button>
             <span></span>
             <input type="reset" class="btn btn-default" value="Cancelar">
           </div>
