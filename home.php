@@ -24,10 +24,7 @@ if($retorno_select){
         header('Location: cadastrar_perfil.php');
     }
     
-}else{
-    echo 'Erro na consulta com o banco de dados!';
 }
-
 
 ?>
 
