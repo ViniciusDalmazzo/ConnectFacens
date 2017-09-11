@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 05-Set-2017 às 21:43
+-- Generation Time: 11-Set-2017 às 01:56
 -- Versão do servidor: 10.1.25-MariaDB
 -- PHP Version: 7.1.7
 
@@ -33,15 +33,9 @@ CREATE TABLE `post` (
   `id_usuario` int(11) NOT NULL,
   `post` varchar(140) NOT NULL,
   `titulo` varchar(50) NOT NULL,
-  `data_inclusao` datetime DEFAULT CURRENT_TIMESTAMP
+  `data_inclusao` datetime DEFAULT CURRENT_TIMESTAMP,
+  `img_post` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Extraindo dados da tabela `post`
---
-
-INSERT INTO `post` (`id_post`, `id_usuario`, `post`, `titulo`, `data_inclusao`) VALUES
-(1, 1, 'Primeiro post do site #first', 'Só um titulo aleatório. ', '2017-09-05 15:50:36');
 
 --
 -- Indexes for dumped tables
@@ -61,7 +55,7 @@ ALTER TABLE `post`
 -- AUTO_INCREMENT for table `post`
 --
 ALTER TABLE `post`
-  MODIFY `id_post` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;COMMIT;
+  MODIFY `id_post` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
