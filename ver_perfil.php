@@ -17,13 +17,13 @@ $sql = "SELECT * FROM usuarios as u INNER JOIN perfil AS p ON (u.id = p.id_usuar
 $retorno_select = mysqli_query($link,$sql);
 
 if($retorno_select){  
-    
-    $dados_perfil = mysqli_fetch_array($retorno_select);    
-    
-    if(!isset($dados_perfil['usuario'])){      
-        header('Location: cadastrar_perfil.php');
-    }
-    
+
+  $dados_perfil = mysqli_fetch_array($retorno_select);    
+
+  if(!isset($dados_perfil['usuario'])){      
+    header('Location: cadastrar_perfil.php');
+  }
+
 }
 
 ?>
@@ -194,7 +194,44 @@ if($retorno_select){
 
                     <div class="box-body">
                      <div class="col-sm-6">
-                       <div  align="center"> <img alt="User Pic" src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg" id="profile-image1" class="img-circle img-responsive"> 
+                       <div  align="center"> <img alt="User Pic" 
+
+                         <?php
+
+                         $id_usuario = $_SESSION['id_usuario'];
+                         $objDb = new db();
+                         $link = $objDb->conecta_mysql();
+
+                         $sql = " SELECT * FROM img_perfil where id_usuario = $id_usuario";
+
+                         $resultado_id = mysqli_query($link,$sql);
+
+                         if($resultado_id){
+
+                          while($registro = mysqli_fetch_array($resultado_id,MYSQLI_ASSOC)){  
+
+                            if($registro['img']==''){
+
+                              echo 'src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg"';
+
+                            }else{
+                               echo 'src="imagens/users/'.$registro['id_usuario'].'/'.$registro['img'].'"';   
+                            }
+
+                             
+                          }
+
+                        }else{
+                          echo 'Erro na consulta';
+                        }
+
+
+
+                        ?>
+
+                        
+
+                        id="profile-image1" class="img-circle img-responsive"> 
 
                         <div id="profile-image-upload" >  </div>                      
                         
@@ -440,118 +477,118 @@ if($retorno_select){
 
             <div class="col-sm-5 col-xs-6 tital " >Estado:</div><div class="col-sm-7"><span id="estado">
             <?php 
-              require_once("db.class.php");                       
-              $id_usuario = $_SESSION['id_usuario'];
-              $objDb = new db();
-              $link = $objDb->conecta_mysql();
+            require_once("db.class.php");                       
+            $id_usuario = $_SESSION['id_usuario'];
+            $objDb = new db();
+            $link = $objDb->conecta_mysql();
 
-              $sql = "SELECT e.UF_NOME FROM estado as e JOIN perfil as p on (p.id_estado = e.UF_ID) WHERE p.id_usuario = $id_usuario";
+            $sql = "SELECT e.UF_NOME FROM estado as e JOIN perfil as p on (p.id_estado = e.UF_ID) WHERE p.id_usuario = $id_usuario";
 
-              $resultado = mysqli_query($link,$sql);
+            $resultado = mysqli_query($link,$sql);
 
-              if($resultado){
+            if($resultado){
 
-                while($registro = mysqli_fetch_array($resultado,MYSQLI_ASSOC)){
-                  echo $registro['UF_NOME'];
-                }
-
-              }else{
-                echo 'Erro na consulta';
+              while($registro = mysqli_fetch_array($resultado,MYSQLI_ASSOC)){
+                echo $registro['UF_NOME'];
               }
-              ?> 
-              </span></div>
 
-            <div class="clearfix"></div>
-            <div class="bot-border"></div>
+            }else{
+              echo 'Erro na consulta';
+            }
+            ?> 
+          </span></div>
 
-            <div class="col-sm-5 col-xs-6 tital " >Cidade:</div><div class="col-sm-7"><span id="cidade"><?php 
-              require_once("db.class.php");                       
-              $id_usuario = $_SESSION['id_usuario'];
-              $objDb = new db();
-              $link = $objDb->conecta_mysql();
+          <div class="clearfix"></div>
+          <div class="bot-border"></div>
 
-              $sql = "SELECT c.CT_NOME FROM cidade as c JOIN perfil as p on (p.id_cidade = c.CT_ID) WHERE p.id_usuario = $id_usuario";
+          <div class="col-sm-5 col-xs-6 tital " >Cidade:</div><div class="col-sm-7"><span id="cidade"><?php 
+          require_once("db.class.php");                       
+          $id_usuario = $_SESSION['id_usuario'];
+          $objDb = new db();
+          $link = $objDb->conecta_mysql();
 
-              $resultado = mysqli_query($link,$sql);
+          $sql = "SELECT c.CT_NOME FROM cidade as c JOIN perfil as p on (p.id_cidade = c.CT_ID) WHERE p.id_usuario = $id_usuario";
 
-              if($resultado){
+          $resultado = mysqli_query($link,$sql);
 
-                while($registro = mysqli_fetch_array($resultado,MYSQLI_ASSOC)){
-                  echo $registro['CT_NOME'];
-                }
+          if($resultado){
 
-              }else{
-                echo 'Erro na consulta';
-              }
-              ?> </span></div>
+            while($registro = mysqli_fetch_array($resultado,MYSQLI_ASSOC)){
+              echo $registro['CT_NOME'];
+            }
 
-            <div class="clearfix"></div>
-            <div class="bot-border"></div>
+          }else{
+            echo 'Erro na consulta';
+          }
+          ?> </span></div>
 
-            <div class="col-sm-5 col-xs-6 tital " >Curso:</div><div class="col-sm-7"><span id="idcurso"><?php 
-                        require_once("db.class.php");                       
-                        $id_usuario = $_SESSION['id_usuario'];
-                        $objDb = new db();
-                        $link = $objDb->conecta_mysql();
+          <div class="clearfix"></div>
+          <div class="bot-border"></div>
 
-                        $sql = "SELECT c.nome_curso FROM perfil as p JOIN curso as c on (c.id_curso = p.id_curso) WHERE p.id_usuario = $id_usuario";
+          <div class="col-sm-5 col-xs-6 tital " >Curso:</div><div class="col-sm-7"><span id="idcurso"><?php 
+          require_once("db.class.php");                       
+          $id_usuario = $_SESSION['id_usuario'];
+          $objDb = new db();
+          $link = $objDb->conecta_mysql();
 
-                        $resultado = mysqli_query($link,$sql);
+          $sql = "SELECT c.nome_curso FROM perfil as p JOIN curso as c on (c.id_curso = p.id_curso) WHERE p.id_usuario = $id_usuario";
 
-                        if($resultado){
+          $resultado = mysqli_query($link,$sql);
 
-                          while($registro = mysqli_fetch_array($resultado,MYSQLI_ASSOC)){
-                            echo $registro['nome_curso'];
-                          }
+          if($resultado){
 
-                        }else{
-                          echo 'Erro na consulta';
-                        }
-                        ?> </span></div>
+            while($registro = mysqli_fetch_array($resultado,MYSQLI_ASSOC)){
+              echo $registro['nome_curso'];
+            }
 
-            <div class="clearfix"></div>
-            <div class="bot-border"></div>
+          }else{
+            echo 'Erro na consulta';
+          }
+          ?> </span></div>
 
-            <div class="col-sm-5 col-xs-6 tital " >Semestre:</div><div class="col-sm-7"><span id="Semestre"><?php 
-                        require_once("db.class.php");                       
-                        $id_usuario = $_SESSION['id_usuario'];
-                        $objDb = new db();
-                        $link = $objDb->conecta_mysql();
+          <div class="clearfix"></div>
+          <div class="bot-border"></div>
 
-                        $sql = "SELECT s.semestre FROM perfil as p JOIN semestre as s on (s.id_semestre = p.id_semestre) WHERE p.id_usuario = $id_usuario";
+          <div class="col-sm-5 col-xs-6 tital " >Semestre:</div><div class="col-sm-7"><span id="Semestre"><?php 
+          require_once("db.class.php");                       
+          $id_usuario = $_SESSION['id_usuario'];
+          $objDb = new db();
+          $link = $objDb->conecta_mysql();
 
-                        $resultado = mysqli_query($link,$sql);
+          $sql = "SELECT s.semestre FROM perfil as p JOIN semestre as s on (s.id_semestre = p.id_semestre) WHERE p.id_usuario = $id_usuario";
 
-                        if($resultado){
+          $resultado = mysqli_query($link,$sql);
 
-                          while($registro = mysqli_fetch_array($resultado,MYSQLI_ASSOC)){
-                            echo $registro['semestre'];
-                          }
+          if($resultado){
 
-                        }else{
-                          echo 'Erro na consulta';
-                        }
-                        ?> </span></div>
+            while($registro = mysqli_fetch_array($resultado,MYSQLI_ASSOC)){
+              echo $registro['semestre'];
+            }
 
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
+          }else{
+            echo 'Erro na consulta';
+          }
+          ?> </span></div>
 
+          <!-- /.box-body -->
         </div>
+        <!-- /.box -->
+
+      </div>
 
 
-      </div> 
-    </div>
-  </div>  
+    </div> 
+  </div>
+</div>  
 
 
-  <script>
-    $(function() {
-      $('#profile-image1').on('click', function() {
-        $('#profile-image-upload').click();
-      });
-    });       
-  </script> 
+<script>
+  $(function() {
+    $('#profile-image1').on('click', function() {
+      $('#profile-image-upload').click();
+    });
+  });       
+</script> 
 
 </div>
 </div>

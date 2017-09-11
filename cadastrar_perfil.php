@@ -19,7 +19,7 @@ if(!isset($_SESSION['usuario'])){
   
   <script src="lib/bootstrap2/js/jquery.min.js"></script>
   <script src="lib/bootstrap2/js/bootstrap.min.js"></script>
-  <script src="lib/post_script.js"></script>
+  <script src="lib/img_perfil.js"></script>
   <script src="lib/notificao_script.js"></script>
   
   
@@ -165,185 +165,160 @@ if(!isset($_SESSION['usuario'])){
               <!-- left column -->
               <div class="col-md-3">
                 <div class="text-center">
-                  <img alt="User Pic" src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg" id="profile-image1" class="img-circle img-responsive"> 
+                  <img id="img_perfil_editar_default" alt="Img Perfil" 
 
-                  <h6>Clique para mudar a foto do perfil</h6>
+                  <?php
 
-                  <input type="file" class="form-control">
-                </div>
-              </div>
+                  $id_usuario = $_SESSION['id_usuario'];
+                  $objDb = new db();
+                  $link = $objDb->conecta_mysql();
 
-              <!-- edit form column -->
-              <div class="col-md-9 personal-info">
-                <div class="alert alert-info alert-dismissable">
+                  $sql = " SELECT * FROM img_perfil where id_usuario = $id_usuario";
 
-                  <i class="fa fa-user-o"></i>
-                  Cadastre o seu <strong>perfil</strong> alterando os campos abaixo.
-                </div>
-                <h3>Informações</h3>
+                  $resultado_id = mysqli_query($link,$sql);
 
-                <form class="form-horizontal" role="form" action="salva_perfil.php" method="POST">
-                  <div class="form-group">
-                    <label class="col-lg-3 control-label">Nome:</label>
-                    <div class="col-lg-8">
-                      <input required class="form-control" type="text" name="Nome">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="col-lg-3 control-label">Sobrenome:</label>
-                    <div class="col-lg-8">
-                      <input required class="form-control" type="text" name="Sobrenome">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="col-lg-3 control-label">Data de Nascimento:</label>
-                    <div class="col-lg-8">
-                      <input required class="form-control" type="date" name="DataNasc">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="col-lg-3 control-label">País:</label>
-                    <div class="col-lg-8">
-                      <select required id="pais" class="form-control" name="Pais">  
-                       <option disabled selected value="">Selecione o seu país</option>                    
-                       <?php 
-                       require_once("db.class.php");                       
-                       $id_usuario = $_SESSION['id_usuario'];
-                       $objDb = new db();
-                       $link = $objDb->conecta_mysql();
+                  if($resultado_id){
 
-                       $sql = "SELECT * FROM pais";
+                    while($registro = mysqli_fetch_array($resultado_id,MYSQLI_ASSOC)){  
 
-                       $resultado = mysqli_query($link,$sql);
-
-                       if($resultado){
-
-                        while($registro = mysqli_fetch_array($resultado,MYSQLI_ASSOC)){
-                          echo'<option value='.$registro['SL_ID'].'>'.$registro['SL_NOME_PT'].'</option>';
-                        }
+                      if($registro['img']==NULL){
+                       
+                        echo 'src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg" id="profile-image1"';
 
                       }else{
-                        echo 'Erro na consulta';
-                      }
-                      ?>         
-                    </select>                  
 
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-lg-3 control-label">Estado:</label>
-                  <div class="col-lg-8">
-                    <select required id="estado" class="form-control" name="Estado"> 
-                     <option disabled selected value="">Selecione seu estado</option>                     
-                     <?php 
-                     require_once("db.class.php");                       
-                     $id_usuario = $_SESSION['id_usuario'];
-                     $objDb = new db();
-                     $link = $objDb->conecta_mysql();
+                       echo 'src="imagens/users/'.$registro['id_usuario'].'/'.$registro['img'].'"';   
+                     }
 
-                     $sql = "SELECT * FROM estado order by UF_NOME ASC";
+                     
+                   }
 
-                     $resultado = mysqli_query($link,$sql);
+                 }else{
+                  echo 'Erro na consulta';
+                }
 
-                     if($resultado){
 
-                      while($registro = mysqli_fetch_array($resultado,MYSQLI_ASSOC)){
-                        echo'<option value='.$registro['UF_ID'].'>'.$registro['UF_NOME'].'</option>';
-                      }
 
-                    }else{
-                      echo 'Erro na consulta';
-                    }
-                    ?>         
-                  </select>       
+                ?>
+
+                class="img-circle img-responsive">
+                <br>
+                <div id="img_perfil_editar">
+                </div> 
+
+                <form method="POST" enctype="multipart/form-data" id="form_edita_perfil">
+                 <input id="img_perfil_editar" name="img_perfil_editar" type="file">
+                 <br>
+                 <button type="submit" id="btn_img_perfil_cadastrar" class="btn btn-primary">Editar Foto</button>
+               </form>
+             </div>
+
+           </div>
+
+           <!-- edit form column -->
+           <div class="col-md-9 personal-info">
+            <div class="alert alert-info alert-dismissable">
+
+              <i class="fa fa-user-o"></i>
+              Cadastre o seu <strong>perfil</strong> alterando os campos abaixo.
+            </div>
+            <h3>Informações</h3>
+
+            <form class="form-horizontal" role="form" action="salva_perfil.php" method="POST">
+              <div class="form-group">
+                <label class="col-lg-3 control-label">Nome:</label>
+                <div class="col-lg-8">
+                  <input required class="form-control" type="text" name="Nome">
                 </div>
               </div>
               <div class="form-group">
-                <label class="col-lg-3 control-label">Cidade:</label>
+                <label class="col-lg-3 control-label">Sobrenome:</label>
                 <div class="col-lg-8">
-                  <select required id="cidade" class="form-control" name="Cidade"> 
-                   <option disabled selected value="">Selecione sua cidade</option>                     
+                  <input required class="form-control" type="text" name="Sobrenome">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-lg-3 control-label">Data de Nascimento:</label>
+                <div class="col-lg-8">
+                  <input required class="form-control" type="date" name="DataNasc">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-lg-3 control-label">País:</label>
+                <div class="col-lg-8">
+                  <select required id="pais" class="form-control" name="Pais">  
+                   <option disabled selected value="">Selecione o seu país</option>                    
                    <?php 
                    require_once("db.class.php");                       
                    $id_usuario = $_SESSION['id_usuario'];
                    $objDb = new db();
                    $link = $objDb->conecta_mysql();
 
-                   $sql = "SELECT * FROM cidade order by CT_NOME ASC";
+                   $sql = "SELECT * FROM pais";
 
                    $resultado = mysqli_query($link,$sql);
 
                    if($resultado){
 
                     while($registro = mysqli_fetch_array($resultado,MYSQLI_ASSOC)){
-                      echo'<option value='.$registro['CT_ID'].'>'.$registro['CT_NOME'].'</option>';
+                      echo'<option value='.$registro['SL_ID'].'>'.$registro['SL_NOME_PT'].'</option>';
                     }
 
                   }else{
                     echo 'Erro na consulta';
                   }
                   ?>         
-                </select>    
+                </select>                  
+
               </div>
             </div>
             <div class="form-group">
-              <label class="col-lg-3 control-label">Gênero:</label>
+              <label class="col-lg-3 control-label">Estado:</label>
               <div class="col-lg-8">
-                <div class="ui-select">
-                  <select required id="user_time_zone" class="form-control" name="Genero">
-                    <option disabled selected value="">Selecione o seu gênero</option>
-                    <option value="Masculino">Masculino</option>
-                    <option value="Feminino">Feminino</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="col-md-3 control-label">Curso:</label>
-              <div class="col-md-8">
-                <select required id="curso" class="form-control" name="Curso"> 
-                 <option disabled selected value="">Selecione o seu curso</option>                     
+                <select required id="estado" class="form-control" name="Estado"> 
+                 <option disabled selected value="">Selecione seu estado</option>                     
                  <?php 
                  require_once("db.class.php");                       
                  $id_usuario = $_SESSION['id_usuario'];
                  $objDb = new db();
                  $link = $objDb->conecta_mysql();
 
-                 $sql = "SELECT * FROM curso order by nome_curso ASC";
+                 $sql = "SELECT * FROM estado order by UF_NOME ASC";
 
                  $resultado = mysqli_query($link,$sql);
 
                  if($resultado){
 
                   while($registro = mysqli_fetch_array($resultado,MYSQLI_ASSOC)){
-                    echo'<option value='.$registro['id_curso'].'>'.$registro['nome_curso'].'</option>';
+                    echo'<option value='.$registro['UF_ID'].'>'.$registro['UF_NOME'].'</option>';
                   }
 
                 }else{
                   echo 'Erro na consulta';
                 }
                 ?>         
-              </select>    
+              </select>       
             </div>
           </div>
           <div class="form-group">
-            <label class="col-md-3 control-label">Semestre:</label>
-            <div class="col-md-8">
-            <select required id="semestre" class="form-control" name="Semestre"> 
-               <option disabled selected value="">Selecione o seu semestre</option>                     
+            <label class="col-lg-3 control-label">Cidade:</label>
+            <div class="col-lg-8">
+              <select required id="cidade" class="form-control" name="Cidade"> 
+               <option disabled selected value="">Selecione sua cidade</option>                     
                <?php 
-               require_once("db.class.php");          
+               require_once("db.class.php");                       
+               $id_usuario = $_SESSION['id_usuario'];
                $objDb = new db();
                $link = $objDb->conecta_mysql();
 
-               $sql = "SELECT * FROM semestre";
+               $sql = "SELECT * FROM cidade order by CT_NOME ASC";
 
                $resultado = mysqli_query($link,$sql);
 
                if($resultado){
 
                 while($registro = mysqli_fetch_array($resultado,MYSQLI_ASSOC)){
-                  echo'<option value='.$registro['id_semestre'].'>'.$registro['semestre'].'</option>';
+                  echo'<option value='.$registro['CT_ID'].'>'.$registro['CT_NOME'].'</option>';
                 }
 
               }else{
@@ -354,16 +329,83 @@ if(!isset($_SESSION['usuario'])){
           </div>
         </div>
         <div class="form-group">
-          <label class="col-md-3 control-label"></label>
-          <div class="col-md-8">
-            <button type="submit" class="btn btn-info">Cadastrar</button>
-            <span></span>
-            <input type="reset" class="btn btn-default" value="Cancelar">
+          <label class="col-lg-3 control-label">Gênero:</label>
+          <div class="col-lg-8">
+            <div class="ui-select">
+              <select required id="user_time_zone" class="form-control" name="Genero">
+                <option disabled selected value="">Selecione o seu gênero</option>
+                <option value="Masculino">Masculino</option>
+                <option value="Feminino">Feminino</option>
+              </select>
+            </div>
           </div>
         </div>
-      </form>
+        <div class="form-group">
+          <label class="col-md-3 control-label">Curso:</label>
+          <div class="col-md-8">
+            <select required id="curso" class="form-control" name="Curso"> 
+             <option disabled selected value="">Selecione o seu curso</option>                     
+             <?php 
+             require_once("db.class.php");                       
+             $id_usuario = $_SESSION['id_usuario'];
+             $objDb = new db();
+             $link = $objDb->conecta_mysql();
+
+             $sql = "SELECT * FROM curso order by nome_curso ASC";
+
+             $resultado = mysqli_query($link,$sql);
+
+             if($resultado){
+
+              while($registro = mysqli_fetch_array($resultado,MYSQLI_ASSOC)){
+                echo'<option value='.$registro['id_curso'].'>'.$registro['nome_curso'].'</option>';
+              }
+
+            }else{
+              echo 'Erro na consulta';
+            }
+            ?>         
+          </select>    
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-3 control-label">Semestre:</label>
+        <div class="col-md-8">
+          <select required id="semestre" class="form-control" name="Semestre"> 
+           <option disabled selected value="">Selecione o seu semestre</option>                     
+           <?php 
+           require_once("db.class.php");          
+           $objDb = new db();
+           $link = $objDb->conecta_mysql();
+
+           $sql = "SELECT * FROM semestre";
+
+           $resultado = mysqli_query($link,$sql);
+
+           if($resultado){
+
+            while($registro = mysqli_fetch_array($resultado,MYSQLI_ASSOC)){
+              echo'<option value='.$registro['id_semestre'].'>'.$registro['semestre'].'</option>';
+            }
+
+          }else{
+            echo 'Erro na consulta';
+          }
+          ?>         
+        </select>    
+      </div>
     </div>
-  </div>
+    <div class="form-group">
+      <label class="col-md-3 control-label"></label>
+      <div class="col-md-8">
+        <button type="submit" class="btn btn-info">Cadastrar</button>
+        <span></span>
+        <input type="reset" class="btn btn-default" value="Cancelar">
+      </div>
+    </div>
+  </form>
+</div>
+</div>
 </div>
 <hr>
 

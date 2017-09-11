@@ -170,7 +170,5 @@ $erro_email = isset($_GET['erro_email']) ? $_GET['erro_email'] : 0;
 
   <script src="lib/index.js"></script>
 
-
-
 </body>
 </html>
