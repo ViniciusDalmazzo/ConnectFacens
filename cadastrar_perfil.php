@@ -168,7 +168,8 @@ if(!isset($_SESSION['usuario'])){
                   <img id="img_perfil_editar_default" alt="Img Perfil" 
 
                   <?php
-
+                  
+                  require_once('db.class.php');
                   $id_usuario = $_SESSION['id_usuario'];
                   $objDb = new db();
                   $link = $objDb->conecta_mysql();
@@ -177,24 +178,16 @@ if(!isset($_SESSION['usuario'])){
 
                   $resultado_id = mysqli_query($link,$sql);
 
-                  if($resultado_id){
+                  if (mysqli_num_rows($resultado_id)>0){
 
                     while($registro = mysqli_fetch_array($resultado_id,MYSQLI_ASSOC)){  
-
-                      if($registro['img']==NULL){
-                       
-                        echo 'src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg" id="profile-image1"';
-
-                      }else{
-
-                       echo 'src="imagens/users/'.$registro['id_usuario'].'/'.$registro['img'].'"';   
-                     }
-
                      
+                       echo 'src="imagens/users/'.$registro['id_usuario'].'/'.$registro['img'].'"';                   
+
                    }
 
                  }else{
-                  echo 'Erro na consulta';
+                  echo 'src="imagens/users/user_img.jpg"';
                 }
 
 
