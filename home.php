@@ -197,8 +197,48 @@ if($retorno_select){
 					<div class="modal-body">
 
 					
+<div class="row">
+<div class="col-md-1" style="margin-right: 5px;">
+<img class="img-circle" width="50" height="50" 
 
-						<input id="titulo_post" type="text" placeholder="Titulo" id="titulo_post" name="titulo_post">
+<?php
+                         require_once('db.class.php');
+
+                         $id_usuario = $_SESSION['id_usuario'];
+                         $objDb = new db();
+                         $link = $objDb->conecta_mysql();
+
+                         $sql = " SELECT * FROM img_perfil where id_usuario = $id_usuario";
+
+                         $resultado_id = mysqli_query($link,$sql);
+
+                        if (mysqli_num_rows($resultado_id)>0){
+
+                          while($registro = mysqli_fetch_array($resultado_id,MYSQLI_ASSOC)){  
+
+                           echo 'src="imagens/users/'.$registro['id_usuario'].'/'.$registro['img'].'"'; 
+                           
+                         }
+
+                       }else{
+                        echo 'src="imagens/users/user_img.jpg"';
+                      }
+
+
+
+                      ?>
+
+
+
+
+>
+</div >
+<div class="col-md-10">
+<input style="margin-top: 0px;width: 504px;margin-left: 10px;" id="titulo_post" type="text" placeholder="Titulo" id="titulo_post" name="titulo_post">
+</div>
+</div>
+					
+						
 
 						<textarea id="texto_post" id="texto_post" name="texto_post" style="resize: none;" placeholder="Descrição"></textarea>
 						<input type="file" id="imagem" name="imagem"/>	

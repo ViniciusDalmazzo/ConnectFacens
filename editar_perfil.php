@@ -177,6 +177,8 @@ if($retorno_select){
 
                   <?php
 
+
+                  require_once('db.class.php');
                   $id_usuario = $_SESSION['id_usuario'];
                   $objDb = new db();
                   $link = $objDb->conecta_mysql();
@@ -185,34 +187,24 @@ if($retorno_select){
 
                   $resultado_id = mysqli_query($link,$sql);
 
-                  if($resultado_id){
+                  if (mysqli_num_rows($resultado_id)>0){
 
                     while($registro = mysqli_fetch_array($resultado_id,MYSQLI_ASSOC)){  
-
-                      if($registro['img']==''){
-
-                        echo 'src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg" id="profile-image1"';
-
-                      }else{
-                       echo 'src="imagens/users/'.$registro['id_usuario'].'/'.$registro['img'].'"';   
-                     }
-
+                     
+                       echo 'src="imagens/users/'.$registro['id_usuario'].'/'.$registro['img'].'"';                   
 
                    }
 
                  }else{
-                  echo 'Erro na consulta';
+                  echo 'src="imagens/users/user_img.jpg"';
                 }
 
 
 
                 ?>
 
-
-
-
-
                 class="img-circle img-responsive">
+
                 <div id="img_perfil_editar">
                 </div> 
 

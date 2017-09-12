@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 11-Set-2017 às 07:50
+-- Generation Time: 12-Set-2017 às 17:03
 -- Versão do servidor: 10.1.25-MariaDB
 -- PHP Version: 7.1.7
 
@@ -36,14 +36,6 @@ CREATE TABLE `img_perfil` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `img_perfil`
---
-
-INSERT INTO `img_perfil` (`id_img_perfil`, `id_usuario`, `id_perfil`, `img`) VALUES
-(21, 2, 0, 'img_perfil_user_2.jpg'),
-(22, 1, NULL, 'img_perfil_user_1.jpg');
-
---
 -- Indexes for dumped tables
 --
 
@@ -61,7 +53,7 @@ ALTER TABLE `img_perfil`
 -- AUTO_INCREMENT for table `img_perfil`
 --
 ALTER TABLE `img_perfil`
-  MODIFY `id_img_perfil` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;COMMIT;
+  MODIFY `id_img_perfil` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
