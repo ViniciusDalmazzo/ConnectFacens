@@ -14,7 +14,7 @@ $link = $objDb->conecta_mysql();
 
 
 
-$sql = " SELECT * FROM usuarios AS u JOIN amizade AS a ON ((u.id = a.id_usuario or u.id = a.id_amigo) and (a.id_amigo = $id_usuario or a.id_usuario = $id_usuario)) JOIN img_perfil as i on (u.id = i.id_usuario) where id <> $id_usuario";
+$sql = " SELECT * FROM usuarios AS u JOIN amizade AS a ON ((u.id = a.id_usuario or u.id = a.id_amigo) and (a.id_amigo = $id_usuario or a.id_usuario = $id_usuario)) JOIN img_perfil as i on (u.id = i.id_usuario) JOIN perfil AS p ON (p.id_usuario = u.id) where id <> $id_usuario";
 
 $resultado_id = mysqli_query($link,$sql);
 
@@ -28,7 +28,7 @@ if($resultado_id){
 		if(MOD($count,2)==0){
 			echo '<div style="height: 75px;"';
 			echo '<a href="#" class="list-group-item">';
-			echo '<strong><a href="ver_perfil_usuario.php?user='.$registro['id_usuario'].'"><img class="img-circle" style="border: 1px solid lightgrey;" width="50" height="50" src="imagens/users/'.$registro['id_usuario'].'/'.$registro['img'].'"></a><a href="ver_perfil_usuario.php?user='.$registro['id_usuario'].'">&nbsp;&nbsp;'.$registro['usuario'].'</a></strong><button style="margin-top: 10px;" type="button" data-id_usuario_desfazer="'.$registro['id'].'" class="btn btn_desfazer btn-danger pull-right">Excluir</button>';
+			echo '<strong><a href="ver_perfil_usuario.php?user='.$registro['id_usuario'].'"><img class="img-circle" style="border: 1px solid lightgrey;" width="50" height="50" src="imagens/users/'.$registro['id_usuario'].'/'.$registro['img'].'"></a><a href="ver_perfil_usuario.php?user='.$registro['id_usuario'].'">&nbsp;&nbsp;'.$registro['nome'].'&nbsp;'.$registro['sobrenome'].'</a></strong><button style="margin-top: 10px;" type="button" data-id_usuario_desfazer="'.$registro['id'].'" class="btn btn_desfazer btn-danger pull-right">Excluir</button>';
 			echo '</a></div>';
 		}
 

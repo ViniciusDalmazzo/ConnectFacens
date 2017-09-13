@@ -149,7 +149,34 @@ if($retorno_select){
 						</header>
 					</div>
 					<div class="user-dashboard">
-						<h1>Seja bem vindo, <?php echo $_SESSION['usuario']; ?></h1>
+						<h1>Seja bem vindo, 
+
+							<?php 
+
+						require_once('db.class.php');
+
+                         $id_usuario = $_SESSION['id_usuario'];
+                         $objDb = new db();
+                         $link = $objDb->conecta_mysql();
+
+                         $sql = " SELECT * FROM perfil where id_usuario = $id_usuario";
+
+                         $resultado_id = mysqli_query($link,$sql);
+
+                        if (mysqli_num_rows($resultado_id)>0){
+
+                          while($registro = mysqli_fetch_array($resultado_id,MYSQLI_ASSOC)){  
+
+                           echo ''.$registro['nome'].'&nbsp;'.$registro['sobrenome'].''; 
+                           
+                         }
+
+                       }else{
+                        echo 'src="imagens/users/user_img.jpg"';
+                      }
+
+
+						?></h1>
 						<div class="container">
 
 							<div class="sales report ">

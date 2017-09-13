@@ -23,9 +23,6 @@ $link = $objDb->conecta_mysql();
 
 
 
-
-
-
 $sql = " insert into perfil(id_usuario,nome, sobrenome, data_nascimento,id_pais,id_estado,id_cidade,genero,id_curso,id_semestre) values ($id_usuario,'$nome', '$sobrenome', '$dataNasc',  $pais, $estado, $cidade, '$genero', $curso, $semestre)";
 
 if(mysqli_query($link, $sql)){
