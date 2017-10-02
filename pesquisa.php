@@ -28,10 +28,7 @@ if($retorno_select){
 	<title>Connect Facens</title>
 	<link rel="shortcut icon" href="imagens/icone.ico" />
 	
-	
-	
 	<link href="lib/fa/css/font-awesome.min.css" rel="stylesheet">
-	<!-- bootstrap - link cdn -->
 	<link rel="stylesheet" href="lib/bootstrap/css/bootstrap.css">
 	<link rel="stylesheet" href="lib/body.css">
 	<link rel="stylesheet" href="lib/home_css.css">
@@ -49,10 +46,10 @@ if($retorno_select){
 				</div>
 				<div class="navi">
 					<ul>
-						<li class="active"><a href="#"><i class="fa fa-home" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Inicio</span></a></li>
+						<li ><a href="home.php"><i class="fa fa-home" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Inicio</span></a></li>
 						<li><a href="amigos.php"><i class="fa fa-user" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Amigos</span></a></li>
 						<li><a href="#"><i class="fa fa-envelope" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Mensagens</span></a></li>	
-						<li><a href="pesquisa.php"><i class="fa fa-search" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Buscar</span></a></li>											
+						<li class="active"><a href="pesquisa.php"><i class="fa fa-search" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Buscar</span></a></li>											
 						<li><a href="#"><i class="fa fa-calendar" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Calendario</span></a></li>						
 						<li><a href="ver_perfil.php"><i class="fa fa-user" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Meu Perfil</span></a></li>
 						<li><a href="#"><i class="fa fa-cog" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Configuração</span></a></li>
@@ -67,7 +64,7 @@ if($retorno_select){
 				<!--<button type="button" class="slide-toggle">Slide Toggle</button> -->
 				<div class="row">
 					<header style="height: 98px;">
-						<div class="col-md-7 ">
+						<div class="col-md-7">
 							<nav class="navbar-default pull-left">
 								<div class="navbar-header">
 									<button type="button" class="navbar-toggle collapsed" data-toggle="offcanvas" data-target="#side-menu" aria-expanded="false">
@@ -81,14 +78,14 @@ if($retorno_select){
 							<div class="container">
 							<div class="row">    
 								<div class="col-xs-8 ">
-									<div class="input-group">
-										       <form name="frmBusca" method="POST" id="form_pesquisar" style="width:600px;">
-										<input name="pesquisar_txt" style="height:50px;width:500px;"type="text" class="form-control" id="pesquisar_txt" placeholder="Pesquisar">
-										<span class="input-group-btn">
-											<button style="height:50px;width:50px;" class="btn btn-default" type="submit" id="btn_pesquisar2"><span class="glyphicon glyphicon-search"></span></button>
-										</span>
-                                              </form>
-									</div>
+								<div class="input-group">
+								<form name="frmBusca" id="form_pesquisar" style="width:600px;">
+						 <input name="pesquisar_txt" style="height:50px;width:500px;" type="text" class="form-control" id="pesquisar_txt" placeholder="Pesquisar">
+						 <span class="input-group-btn">
+							 <button type="button" style="height:50px;width:50px;" class="btn btn-default"  id="btn_pesquisar"><span class="glyphicon glyphicon-search"></span></button>
+						 </span>
+							   </form>
+					 </div>
 								</div>
 							</div>
 						</div>
@@ -157,146 +154,18 @@ if($retorno_select){
 							</div>
 						</header>
 					</div>
-					<div class="user-dashboard">
-						<h1>Seja bem vindo, 
-
-							<?php 
-
-						require_once('db.class.php');
-
-                         $id_usuario = $_SESSION['id_usuario'];
-                         $objDb = new db();
-                         $link = $objDb->conecta_mysql();
-
-                         $sql = " SELECT * FROM perfil where id_usuario = $id_usuario";
-
-                         $resultado_id = mysqli_query($link,$sql);
-
-                        if (mysqli_num_rows($resultado_id)>0){
-
-                          while($registro = mysqli_fetch_array($resultado_id,MYSQLI_ASSOC)){  
-
-                           echo ''.$registro['nome'].'&nbsp;'.$registro['sobrenome'].''; 
-                           
-                         }
-
-                       }else{
-                        echo 'src="imagens/users/user_img.jpg"';
-                      }
-
-
-						?></h1>
-						<div class="container">
-
-							<div class="sales report ">
-								<h2>Postagens</h2>
-								<div class="btn-group">									
-
-									<button class="btn btn-secondary btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-
-										<span>Filtrar:</span>Tudo
-									</button>
-									<div class="dropdown-menu">
-										<a href="#">Curso</a>
-										<a href="#">Semestre</a>
-										<a href="#">Cidade</a>										
-									</div>
-								</div>
-							</div>
-
-							<div id="posts" >
-
-							</div>
-
-
-						</div>
-					</div>
-				</div>
-			</div>
-
-		</div>
-
-
-
-		<!-- Modal -->
-		
-		<div id="add_project" class="modal fade" role="dialog">
-			<div class="modal-dialog">
-
-				<!-- Modal content-->
-				<div class="modal-content">
-					<div class="modal-header login-header">
-						<button type="button" class="close" data-dismiss="modal">×</button>
-						<h4 class="modal-title">Adicionar Postagem</h4>
-					</div>
-					<form method="POST" id="form_post" enctype="multipart/form-data">
-					<div class="modal-body">
+					<div class="container">					
+						
+							
+					<div id="resultado_pesquisa" class="list-group"></div>
 
 					
-<div class="row">
-<div class="col-md-1" style="margin-right: 5px;">
-<img class="img-circle" width="50" height="50" 
-
-<?php
-                         require_once('db.class.php');
-
-                         $id_usuario = $_SESSION['id_usuario'];
-                         $objDb = new db();
-                         $link = $objDb->conecta_mysql();
-
-                         $sql = " SELECT * FROM img_perfil where id_usuario = $id_usuario";
-
-                         $resultado_id = mysqli_query($link,$sql);
-
-                        if (mysqli_num_rows($resultado_id)>0){
-
-                          while($registro = mysqli_fetch_array($resultado_id,MYSQLI_ASSOC)){  
-
-                           echo 'src="imagens/users/'.$registro['id_usuario'].'/'.$registro['img'].'"'; 
-                           
-                         }
-
-                       }else{
-                        echo 'src="imagens/users/user_img.jpg"';
-                      }
-
-
-
-                      ?>
-
-
-
-
->
-</div >
-<div class="col-md-10">
-<input  style="margin-top: 0px;width: 504px;margin-left: 10px;" id="titulo_post" type="text" placeholder="Titulo" id="titulo_post" name="titulo_post">
-</div>
-</div>
-					
-						
-
-						<textarea required id="texto_post" id="texto_post" name="texto_post" style="resize: none;" placeholder="Descrição"></textarea>
-						<input type="file" id="imagem" name="imagem"/>	
-					</div>
-					<div class="modal-footer">					
-						
-						<button type="button" class="cancel" data-dismiss="modal">Fechar</button>
-						<button type="submit" id="btn_post" class="add-project" data-dismiss="modal">Postar</button>
-
-					</div>
-					</form>
+				
 				</div>
-
-			</div>
-		</div>
-		
-
 
 	</body>
-
 	
-	<script src="lib/bootstrap2/js/jquery.min.js" type="text/javascript"></script>
+	<script src="lib/bootstrap2/js/jquery.min.js" type="text/javascript"></script>	
 	<script src="lib/bootstrap2/js/bootstrap.min.js" type="text/javascript"></script>
 	<script src="lib/pesquisar_script.js" type="text/javascript"></script>
 	<script src="lib/post_script.js" type="text/javascript"></script>

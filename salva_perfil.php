@@ -38,7 +38,7 @@ $sql = " SELECT * FROM img_perfil where id_usuario = $id_usuario";
 
 $resultado_id = mysqli_query($link,$sql);
 
-if (mysqli_num_rows($resultado_id)>0){
+if (mysqli_num_rows($resultado_id)>0){	
 
 	while($registro = mysqli_fetch_array($resultado_id,MYSQLI_ASSOC)){  
 
@@ -53,13 +53,14 @@ if (mysqli_num_rows($resultado_id)>0){
 	}
 
 }else{
+	$newPath = "imagens/users/".$id_usuario."/";
 
 	if(!is_dir($newPath)){
 		mkdir($newPath);
 	}
-
+	
 	$imagePath = "imagens/users/user_img.jpg";
-	$newPath = "imagens/users/".$id_usuario."/";
+
 	$ext = '.jpg';
 	$img_name = 'img_perfil_user_'.$id_usuario.$ext;
 	$newName  = $newPath.$img_name;

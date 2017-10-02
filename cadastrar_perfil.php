@@ -42,13 +42,16 @@ if(!isset($_SESSION['usuario'])){
         </div>
         <div class="navi">
           <ul>
-            <li ><a href="home.php"><i class="fa fa-home" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Inicio</span></a></li>
-            <li><a href="#"><i class="fa fa-tasks" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Postagens</span></a></li>
-            <li><a href="#"><i class="fa fa-bar-chart" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Estatisticas</span></a></li>
+            <li ><a href="#"><i class="fa fa-home" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Inicio</span></a></li>
             <li><a href="amigos.php"><i class="fa fa-user" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Amigos</span></a></li>
-            <li><a href="#"><i class="fa fa-calendar" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Calendario</span></a></li>
+            <li><a href="#"><i class="fa fa-envelope" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Mensagens</span></a></li>  
+            <li><a href="#"><i class="fa fa-search" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Buscar</span></a></li>   
+                        
+            <li><a href="#"><i class="fa fa-calendar" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Calendario</span></a></li>           
+            <li><a href="ver_perfil.php"><i class="fa fa-user" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Meu Perfil</span></a></li>
             <li><a href="#"><i class="fa fa-cog" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Configuração</span></a></li>
-            <li class="active"><a href="ver_perfil.php"><i class="fa fa-user" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Meu Perfil</span></a></li>
+            <li><a target="_blank" href="http://blackboard.facens.br/"><i class="fa fa-book" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Black Board</span></a></li>
+            <li><a target="_blank" href="http://www.facens.br/"><i class="fa fa-university" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Facens</span></a></li>
             
 
           </ul>
@@ -391,9 +394,8 @@ if(!isset($_SESSION['usuario'])){
     <div class="form-group">
       <label class="col-md-3 control-label"></label>
       <div class="col-md-8">
-        <button type="submit" class="btn btn-info">Cadastrar</button>
-        <span></span>
-        <input type="reset" class="btn btn-default" value="Cancelar">
+        <button type="submit" class="btn btn-primary">Cadastrar</button>
+        
       </div>
     </div>
   </form>

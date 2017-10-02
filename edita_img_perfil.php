@@ -36,8 +36,8 @@ if(isset($_FILES["img_perfil_editar"])){
 		echo "erro";
 	}	
 
-	/*$sql = " update img_perfil set img ='$img_name' where id_usuario = $id_usuario ";
-	mysqli_query($link,$sql);*/
+	$sql = "update img_perfil set img ='$img_name' where id_usuario = $id_usuario ";
+	mysqli_query($link,$sql);
 
 	}
 
