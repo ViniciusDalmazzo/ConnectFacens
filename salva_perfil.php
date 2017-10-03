@@ -26,7 +26,7 @@ $link = $objDb->conecta_mysql();
 $sql = " insert into perfil(id_usuario,nome, sobrenome, data_nascimento,id_pais,id_estado,id_cidade,genero,id_curso,id_semestre) values ($id_usuario,'$nome', '$sobrenome', '$dataNasc',  $pais, $estado, $cidade, '$genero', $curso, $semestre)";
 
 if(mysqli_query($link, $sql)){
-	header('Location: home.php');	
+	header('Location: home.php?page=pagina_inicial');	
 }else{
 	echo 'Erro ao registrar o Perfil';
 }
@@ -45,7 +45,7 @@ if (mysqli_num_rows($resultado_id)>0){
 		$sql1 = "UPDATE img_perfil SET id_perfil=$id_perfil where id_usuario = $id_usuario";
 
 		if(mysqli_query($link, $sql1)){
-			header('Location: home.php');	
+			header('Location: home.php?page=pagina_inicial');	
 		}else{
 			echo 'Erro ao registrar o Perfil';
 		}
@@ -68,7 +68,7 @@ if (mysqli_num_rows($resultado_id)>0){
 
 	$sql2 = " insert into img_perfil(id_usuario,id_perfil,img) values ($id_usuario,$id_perfil,'$img_name')";
 	if(mysqli_query($link, $sql2)){
-		header('Location: home.php');	
+		header('Location: home.php?page=pagina_inicial');	
 	}else{
 		echo 'Erro ao registrar o Perfil';
 	}

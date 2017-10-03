@@ -5,19 +5,39 @@ $usuario = $_SESSION['usuario'];
 if(!isset($_SESSION['usuario'])){
 	header('Location: index.php?erro=1');
 }
+
 $objDb = new db();
 $link = $objDb->conecta_mysql();
 $sql = "SELECT * FROM usuarios as u INNER JOIN perfil AS p ON (u.id = p.id_usuario) WHERE u.usuario = '$usuario'";
 $retorno_select = mysqli_query($link,$sql);
-if($retorno_select){	
+
+if($_GET['page']==''){
+	header('Location: home.php?page=pagina_inicial');
+}
+
+if($retorno_select && $_GET['page']=='cadastrar_perfil'){	
+    
+    $dados_perfil = mysqli_fetch_array($retorno_select);    
+    
+    if(isset($dados_perfil['usuario'])){      
+        header('Location: home.php?page=pagina_inicial');
+    }
+    
+}
+
+if($retorno_select && $_GET['page']!='cadastrar_perfil'){	
     
     $dados_perfil = mysqli_fetch_array($retorno_select);    
     
     if(!isset($dados_perfil['usuario'])){      
-        header('Location: cadastrar_perfil.php');
+        header('Location: home.php?page=cadastrar_perfil');
     }
     
 }
+
+
+
+
 ?>
 
 <!DOCTYPE HTML>
@@ -49,15 +69,14 @@ if($retorno_select){
 				</div>
 				<div class="navi">
 					<ul>
-						<li class="active"><a href="#"><i class="fa fa-home" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Inicio</span></a></li>
-						<li><a href="amigos.php"><i class="fa fa-user" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Amigos</span></a></li>
-						<li><a href="#"><i class="fa fa-envelope" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Mensagens</span></a></li>	
-						<li><a href="pesquisa.php"><i class="fa fa-search" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Buscar</span></a></li>											
-						<li><a href="#"><i class="fa fa-calendar" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Calendario</span></a></li>						
-						<li><a href="ver_perfil.php"><i class="fa fa-user" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Meu Perfil</span></a></li>
-						<li><a href="#"><i class="fa fa-cog" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Configuração</span></a></li>
-						<li><a target="_blank" href="http://blackboard.facens.br/"><i class="fa fa-book" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Black Board</span></a></li>
-						<li><a target="_blank" href="http://www.facens.br/"><i class="fa fa-university" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Facens</span></a></li>
+						<li id="li_home" class="active"><a href="home.php?page=pagina_inicial"><i class="fa fa-home" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Inicio</span></a></li>
+						<li id="li_amigos"><a href="home.php?page=amigos"><i class="fa fa-user" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Amigos</span></a></li>
+						<li id="li_mensagens"><a href="#"><i class="fa fa-envelope" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Mensagens</span></a></li>																	
+						<li id="li_calendario"><a href="#"><i class="fa fa-calendar" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Calendario</span></a></li>						
+						<li id="li_perfil"><a href="home.php?page=ver_perfil"><i class="fa fa-user" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Meu Perfil</span></a></li>
+						<li id="li_config"><a href="#"><i class="fa fa-cog" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Configuração</span></a></li>
+						<li ><a target="_blank" href="http://blackboard.facens.br/"><i class="fa fa-book" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Black Board</span></a></li>
+						<li ><a target="_blank" href="http://www.facens.br/"><i class="fa fa-university" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Facens</span></a></li>
 						
 
 					</ul>
@@ -85,7 +104,7 @@ if($retorno_select){
 										       <form name="frmBusca" method="POST" id="form_pesquisar" style="width:600px;">
 										<input name="pesquisar_txt" style="height:50px;width:500px;"type="text" class="form-control" id="pesquisar_txt" placeholder="Pesquisar">
 										<span class="input-group-btn">
-											<button style="height:50px;width:50px;" class="btn btn-default" type="submit" id="btn_pesquisar2"><span class="glyphicon glyphicon-search"></span></button>
+											<button style="height:50px;width:50px;" class="btn btn-default" type="button" id="btn_pesquisar"><span class="glyphicon glyphicon-search"></span></button>
 										</span>
                                               </form>
 									</div>
@@ -157,64 +176,19 @@ if($retorno_select){
 							</div>
 						</header>
 					</div>
-					<div class="user-dashboard">
-						<h1>Seja bem vindo, 
+					
+					<div id="div_home">					
+					
+					<?php
 
-							<?php 
+					if(isset($_GET['page'])){
+						$p = $_GET['page'];
+						include($p.".php");
+					}
 
-						require_once('db.class.php');
-
-                         $id_usuario = $_SESSION['id_usuario'];
-                         $objDb = new db();
-                         $link = $objDb->conecta_mysql();
-
-                         $sql = " SELECT * FROM perfil where id_usuario = $id_usuario";
-
-                         $resultado_id = mysqli_query($link,$sql);
-
-                        if (mysqli_num_rows($resultado_id)>0){
-
-                          while($registro = mysqli_fetch_array($resultado_id,MYSQLI_ASSOC)){  
-
-                           echo ''.$registro['nome'].'&nbsp;'.$registro['sobrenome'].''; 
-                           
-                         }
-
-                       }else{
-                        echo 'src="imagens/users/user_img.jpg"';
-                      }
-
-
-						?></h1>
-						<div class="container">
-
-							<div class="sales report ">
-								<h2>Postagens</h2>
-								<div class="btn-group">									
-
-									<button class="btn btn-secondary btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-
-										<span>Filtrar:</span>Tudo
-									</button>
-									<div class="dropdown-menu">
-										<a href="#">Curso</a>
-										<a href="#">Semestre</a>
-										<a href="#">Cidade</a>										
-									</div>
-								</div>
-							</div>
-
-							<div id="posts" >
-
-							</div>
-
-
-						</div>
+					?>
+					
 					</div>
-				</div>
-			</div>
-
-		</div>
 
 
 
@@ -301,6 +275,7 @@ if($retorno_select){
 	<script src="lib/pesquisar_script.js" type="text/javascript"></script>
 	<script src="lib/post_script.js" type="text/javascript"></script>
 	<script src="lib/notificao_script.js" type="text/javascript"></script>
-	
+	<script src="lib/img_perfil.js" type="text/javascript"></script>
+	<script src="lib/amigos_script.js" type="text/javascript"></script>
 	
 	</html>

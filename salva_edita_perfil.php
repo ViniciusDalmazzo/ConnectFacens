@@ -25,7 +25,7 @@ $sql = " update perfil set nome ='$nome', sobrenome = '$sobrenome',  data_nascim
 
 
 if(mysqli_query($link, $sql)){
-	header('Location: ver_perfil.php');	
+	header('Location: home.php?page=ver_perfil');	
 }else{
 	echo 'Erro ao registrar o Perfil';
 }

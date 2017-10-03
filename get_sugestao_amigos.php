@@ -23,7 +23,7 @@ if($resultado_id){
 
 			echo '<div style="height: 75px;"';
 			echo '<a href="#" class="list-group-item">';
-			echo '<strong><a href="ver_perfil_usuario.php?user='.$registro['id_usuario'].'"><img class="img-circle" style="border: 1px solid lightgrey;" width="50" height="50" src="imagens/users/'.$registro['id_usuario'].'/'.$registro['img'].'"></a><a href="ver_perfil_usuario.php?user='.$registro['id_usuario'].'">&nbsp;&nbsp;'.$registro['nome'].'&nbsp;'.$registro['sobrenome'].'</a> </strong><button style="margin-top: 10px;pointer-events:none;outline:none;background-color:green;"data-id_usuario="'.$registro['id'].'" type="button" class="btn btn_seguir btn-primary pull-right">Convite Enviado</button>';
+			echo '<strong><a href="home.php?page=ver_perfil_usuario&user='.$registro['id_usuario'].'"><img class="img-circle" style="border: 1px solid lightgrey;" width="50" height="50" src="imagens/users/'.$registro['id_usuario'].'/'.$registro['img'].'"></a><a href="home.php?user='.$registro['id_usuario'].'&page=ver_perfil_usuario">&nbsp;&nbsp;'.$registro['nome'].'&nbsp;'.$registro['sobrenome'].'</a> </strong><button style="margin-top: 10px;pointer-events:none;outline:none;background-color:green;"data-id_usuario="'.$registro['id'].'" type="button" class="btn btn_seguir btn-primary pull-right">Convite Enviado</button>';
 			echo '</a></div>';
 
 	}
@@ -44,7 +44,7 @@ if($resultado_id){
 
 			echo '<div style="height: 75px;"';
 			echo '<a href="#" class="list-group-item">';
-			echo '<strong><a href="ver_perfil_usuario.php?user='.$registro['id_usuario'].'"><img class="img-circle" style="border: 1px solid lightgrey;" width="50" height="50" src="imagens/users/'.$registro['id_usuario'].'/'.$registro['img'].'"></a><a href="ver_perfil_usuario.php?user='.$registro['id_usuario'].'">&nbsp;&nbsp;'.$registro['nome'].'&nbsp;'.$registro['sobrenome'].'</a> </strong><button style="margin-top: 10px;" data-id_usuario="'.$registro['id'].'" type="button" class="btn btn_seguir btn-primary pull-right">Adicionar</button>';
+			echo '<strong><a href="home.php?page=ver_perfil_usuario&user='.$registro['id_usuario'].'"><img class="img-circle" style="border: 1px solid lightgrey;" width="50" height="50" src="imagens/users/'.$registro['id_usuario'].'/'.$registro['img'].'"></a><a href="home.php?user='.$registro['id_usuario'].'&page=ver_perfil_usuario">&nbsp;&nbsp;'.$registro['nome'].'&nbsp;'.$registro['sobrenome'].'</a> </strong><button style="margin-top: 10px;" data-id_usuario="'.$registro['id'].'" type="button" class="btn btn_seguir btn-primary pull-right">Adicionar</button>';
 			echo '</a></div>';
 
 	}

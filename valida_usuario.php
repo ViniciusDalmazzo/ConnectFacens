@@ -23,7 +23,7 @@ if($retorno_select){
         $_SESSION['id_usuario'] = $dados_usuario['id'];
         $_SESSION['usuario'] = $dados_usuario['usuario'];
         $_SESSION['email'] = $dados_usuario['email'];        
-        header('Location: cadastrar_perfil.php');
+        header('Location: home.php?page=cadastrar_perfil');
 
     }
     else if(isset($dados_usuario['usuario'])){
@@ -31,7 +31,7 @@ if($retorno_select){
         $_SESSION['id_usuario'] = $dados_usuario['id'];
         $_SESSION['usuario'] = $dados_usuario['usuario'];
         $_SESSION['email'] = $dados_usuario['email'];        
-        header('Location: home.php');
+        header('Location: home.php?page=pagina_inicial');
 
     }else{
         header('Location: index.php?erro=1');       
