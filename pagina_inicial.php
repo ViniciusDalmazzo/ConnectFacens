@@ -45,10 +45,8 @@ if($_GET['page']==''){
 
 							<div class="sales report ">
 								<h2>Postagens</h2>
-								<div class="btn-group">									
-
+								<div class="btn-group">		
 									<button class="btn btn-secondary btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-
 										<span>Filtrar:</span>Tudo
 									</button>
 									<div class="dropdown-menu">
