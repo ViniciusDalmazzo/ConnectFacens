@@ -1,6 +1,5 @@
 <?php
 
-require_once('db.class.php');
 $usuario = $_SESSION['usuario'];
 if(!isset($_SESSION['usuario'])){
 	header('Location: index.php?erro=1');
@@ -15,32 +14,29 @@ if($_GET['page']==''){
 <div class="user-dashboard">
 						<h1>Seja bem vindo, 
 
-							<?php 
+						<?php
 
-						require_once('db.class.php');
+						require_once('controller/usuariosController.php');
 
                          $id_usuario = $_SESSION['id_usuario'];
-                         $objDb = new db();
-                         $link = $objDb->conecta_mysql();
+                        
+                         $resultado = retornaInfoUsuario($id_usuario);
 
-                         $sql = " SELECT * FROM perfil where id_usuario = $id_usuario";
+                         if ($resultado > 0){
 
-                         $resultado_id = mysqli_query($link,$sql);
+						   $var = $resultado[0];
+						   $nome = $var[0];
+						   $sobrenome = $var[1];
 
-                        if (mysqli_num_rows($resultado_id)>0){
+                           echo ''.$nome.'&nbsp;'.$sobrenome.'';  
+						 }
+						 else{
+							header('Location: home.php?page=cadastrar_perfil');
+						 }
 
-                          while($registro = mysqli_fetch_array($resultado_id,MYSQLI_ASSOC)){  
-
-                           echo ''.$registro['nome'].'&nbsp;'.$registro['sobrenome'].''; 
-                           
-                         }
-
-                       }else{
-                        echo 'src="imagens/users/user_img.jpg"';
-                      }
-
-
-						?></h1>
+						?>
+						
+						</h1>
 						<div class="container">
 
 							<div class="sales report ">

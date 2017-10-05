@@ -9,30 +9,19 @@
                   <img id="img_perfil_editar_default" alt="User Pic" 
 
                   <?php
+						            require_once('controller/usuariosController.php');
 
+                        $id_usuario = $_SESSION['id_usuario'];
 
-                  require_once('db.class.php');
-                  $id_usuario = $_SESSION['id_usuario'];
-                  $objDb = new db();
-                  $link = $objDb->conecta_mysql();
+                        if (verificaImagemPerfil($id_usuario)){
 
-                  $sql = " SELECT * FROM img_perfil where id_usuario = $id_usuario";
+							              $img = retornaImagemPerfil($id_usuario);
 
-                  $resultado_id = mysqli_query($link,$sql);
+                            echo 'src="imagens/users/'.$id_usuario.'/'.$img.'"'; 
 
-                  if (mysqli_num_rows($resultado_id)>0){
-
-                    while($registro = mysqli_fetch_array($resultado_id,MYSQLI_ASSOC)){  
-                     
-                       echo 'src="imagens/users/'.$registro['id_usuario'].'/'.$registro['img'].'"';                   
-
-                   }
-
-                 }else{
-                  echo 'src="imagens/users/user_img.jpg"';
-                }
-
-
+                        }else{
+                        	echo 'src="imagens/users/user_img.jpg"';
+                        }
 
                 ?>
 
@@ -82,27 +71,30 @@
                 <label class="col-lg-3 control-label">País:</label>
                 <div class="col-lg-8">
                   <select required id="pais" class="form-control" name="Pais">  
-                   <option disabled selected value="">Selecione o seu país</option>                
-                   <?php 
-                   require_once("db.class.php");                       
-                   $id_usuario = $_SESSION['id_usuario'];
-                   $objDb = new db();
-                   $link = $objDb->conecta_mysql();
+                   <option disabled selected value="">Selecione o seu país</option>
 
-                   $sql = "SELECT * FROM pais";
+                   <?php                  
+                   require_once('controller/usuariosController.php');
 
-                   $resultado = mysqli_query($link,$sql);
+                   $resultado = retornaPaises();
+
+                   $i = 0;
 
                    if($resultado){
 
-                    while($registro = mysqli_fetch_array($resultado,MYSQLI_ASSOC)){
-                      echo'<option value='.$registro['SL_ID'].'>'.$registro['SL_NOME_PT'].'</option>';
+                    while(!empty($resultado[$i])){
+                      $var = $resultado[$i];
+                      $var1 = $var[0];
+                      $var2 = $var[1];
+                      echo'<option value='.$var1.'>'.$var2.'</option>';
+                      $i++;
                     }
 
                   }else{
                     echo 'Erro na consulta';
                   }
-                  ?>         
+                  ?>  
+
                 </select>                  
 
               </div>
@@ -111,27 +103,31 @@
               <label class="col-lg-3 control-label">Estado:</label>
               <div class="col-lg-8">
                 <select required id="estado" class="form-control" name="Estado"> 
-                 <option disabled selected value="">Selecione seu estado</option>                     
+                 <option disabled selected value="">Selecione seu estado</option> 
+
                  <?php 
-                 require_once("db.class.php");                       
-                 $id_usuario = $_SESSION['id_usuario'];
-                 $objDb = new db();
-                 $link = $objDb->conecta_mysql();
+                 require_once('controller/usuariosController.php');                      
 
-                 $sql = "SELECT * FROM estado order by UF_NOME ASC";
+                 $resultado = retornaEstados();
 
-                 $resultado = mysqli_query($link,$sql);
+                 $i = 0;
 
                  if($resultado){
 
-                  while($registro = mysqli_fetch_array($resultado,MYSQLI_ASSOC)){
-                    echo'<option value='.$registro['UF_ID'].'>'.$registro['UF_NOME'].'</option>';
+                  while(!empty($resultado[$i])){
+                    $var = $resultado[$i];
+                    $var1 = $var[0];
+                    $var2 = $var[1];
+                    echo'<option value='.$var1.'>'.$var2.'</option>';
+                    $i++;
                   }
 
                 }else{
                   echo 'Erro na consulta';
                 }
-                ?>         
+
+                ?>   
+
               </select>       
             </div>
           </div>
@@ -141,25 +137,27 @@
               <select required id="cidade" class="form-control" name="Cidade"> 
                <option disabled selected value="">Selecione sua cidade</option>                     
                <?php 
-               require_once("db.class.php");                       
-               $id_usuario = $_SESSION['id_usuario'];
-               $objDb = new db();
-               $link = $objDb->conecta_mysql();
+               require_once('controller/usuariosController.php');
 
-               $sql = "SELECT * FROM cidade order by CT_NOME ASC";
+               $resultado = retornaCidades();
 
-               $resultado = mysqli_query($link,$sql);
+               $i = 0;
 
                if($resultado){
 
-                while($registro = mysqli_fetch_array($resultado,MYSQLI_ASSOC)){
-                  echo'<option value='.$registro['CT_ID'].'>'.$registro['CT_NOME'].'</option>';
+                while(!empty($resultado[$i])){
+                  $var = $resultado[$i];
+                  $var1 = $var[0];
+                  $var2 = $var[1];
+                  echo'<option value='.$var1.'>'.$var2.'</option>';
+                  $i = $i + 1;
                 }
 
               }else{
                 echo 'Erro na consulta';
               }
-              ?>         
+
+              ?>        
             </select>    
           </div>
         </div>
@@ -179,27 +177,31 @@
           <label class="col-md-3 control-label">Curso:</label>
           <div class="col-md-8">
             <select required id="curso" class="form-control" name="Curso"> 
-             <option disabled selected value="">Selecione o seu curso</option>                     
+             <option disabled selected value="">Selecione o seu curso</option>
+
              <?php 
-             require_once("db.class.php");                       
-             $id_usuario = $_SESSION['id_usuario'];
-             $objDb = new db();
-             $link = $objDb->conecta_mysql();
+             require_once('controller/usuariosController.php');                       
+          
+             $resultado = retornaCursos();
 
-             $sql = "SELECT * FROM curso order by nome_curso ASC";
-
-             $resultado = mysqli_query($link,$sql);
+             $i = 0;
 
              if($resultado){
 
-              while($registro = mysqli_fetch_array($resultado,MYSQLI_ASSOC)){
-                echo'<option value='.$registro['id_curso'].'>'.$registro['nome_curso'].'</option>';
+              while(!empty($resultado[$i])){
+                $var = $resultado[$i];
+                $var1 = $var[0];
+                $var2 = $var[1];
+                echo'<option value='.$var1.'>'.$var2.'</option>';
+                $i++;
               }
 
             }else{
               echo 'Erro na consulta';
             }
-            ?>         
+
+            ?>   
+
           </select>    
         </div>
       </div>
@@ -208,25 +210,29 @@
         <div class="col-md-8">
           <select required id="semestre" class="form-control" name="Semestre"> 
            <option disabled selected value="">Selecione o seu semestre</option>                     
+           
            <?php 
-           require_once("db.class.php");          
-           $objDb = new db();
-           $link = $objDb->conecta_mysql();
-
-           $sql = "SELECT * FROM semestre";
-
-           $resultado = mysqli_query($link,$sql);
+           require_once('controller/usuariosController.php');                       
+           
+              $resultado = retornaSemestres();
+          
+            $i = 0;
 
            if($resultado){
 
-            while($registro = mysqli_fetch_array($resultado,MYSQLI_ASSOC)){
-              echo'<option value='.$registro['id_semestre'].'>'.$registro['semestre'].'</option>';
+            while(!empty($resultado[$i])){
+              $var = $resultado[$i];
+              $var1 = $var[0];
+              $var2 = $var[1];
+              echo'<option value='.$var1.'>'.$var2.'</option>';
+              $i++;
             }
 
           }else{
             echo 'Erro na consulta';
           }
-          ?>         
+          ?> 
+
         </select>    
       </div>
     </div>

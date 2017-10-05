@@ -1,6 +1,5 @@
 <?php
 
-require_once('db.class.php');
 $usuario = $_SESSION['usuario'];
 if(!isset($_SESSION['usuario'])){
 	header('Location: index.php?erro=1');
@@ -25,34 +24,22 @@ if($_GET['page']==''){
                      <div class="col-sm-6">
                        <div  align="center"><img alt="User Img" 
 
-                         <?php
-                         require_once('db.class.php');
+                       <?php
+						            require_once('controller/usuariosController.php');
 
-                         $id_usuario = $_SESSION['id_usuario'];
-                         $objDb = new db();
-                         $link = $objDb->conecta_mysql();
+                        $id_usuario = $_SESSION['id_usuario'];
 
-                         $sql = " SELECT * FROM img_perfil where id_usuario = $id_usuario";
+                        if (verificaImagemPerfil($id_usuario)){
 
-                         $resultado_id = mysqli_query($link,$sql);
+							              $img = retornaImagemPerfil($id_usuario);
 
-                        if (mysqli_num_rows($resultado_id)>0){
+                            echo 'src="imagens/users/'.$id_usuario.'/'.$img.'"'; 
 
-                          while($registro = mysqli_fetch_array($resultado_id,MYSQLI_ASSOC)){  
+                        }else{
+                        	echo 'src="imagens/users/user_img.jpg"';
+                        }
 
-                           echo 'src="imagens/users/'.$registro['id_usuario'].'/'.$registro['img'].'"'; 
-                           
-                         }
-
-                       }else{
-                        echo 'src="imagens/users/user_img.jpg"';
-                      }
-
-
-
-                      ?>
-
-
+                        ?>
 
                       id="profile-image1" class="img-circle img-responsive"> 
 
@@ -120,48 +107,53 @@ if($_GET['page']==''){
                   </div>
                   <div class="col-sm-6">
                     <h4 style="color:#00b1b1;" id="nomeCompleto">
+
                       <?php 
-                      require_once("db.class.php");                       
+
+                      require_once('controller/usuariosController.php');
+
                       $id_usuario = $_SESSION['id_usuario'];
-                      $objDb = new db();
-                      $link = $objDb->conecta_mysql();
+                                  
+                      $resultado = retornaInfoUsuario($id_usuario);
 
-                      $sql = "SELECT nome,sobrenome FROM perfil WHERE id_usuario = $id_usuario";
+                        if ($resultado > 0){
 
-                      $resultado = mysqli_query($link,$sql);
+                        $var = $resultado[0];
+                        $nome = $var[0];
+                        $sobrenome = $var[1];
 
-                      if($resultado){
-
-                        while($registro = mysqli_fetch_array($resultado,MYSQLI_ASSOC)){
-                          echo $registro['nome'].'   '.$registro['sobrenome'];
-                        }
-
-                      }else{
-                        echo 'Erro na consulta';
+                        echo ''.$nome.'&nbsp;'.$sobrenome.'';  
                       }
-                      ?> 
+                      else{
+                        header('Location: home.php?page=cadastrar_perfil');
+                      }
+
+                      ?>
+
                     </h4></span>
                     <span><p id="cursoCompleto">
-                      <?php 
-                      require_once("db.class.php");                       
+
+                    <?php 
+
+                      require_once('controller/usuariosController.php');
+
                       $id_usuario = $_SESSION['id_usuario'];
-                      $objDb = new db();
-                      $link = $objDb->conecta_mysql();
+                                  
+                      $resultado = retornaInfoUsuario($id_usuario);
 
-                      $sql = "SELECT c.nome_curso FROM perfil as p JOIN curso as c on (c.id_curso = p.id_curso) WHERE p.id_usuario = $id_usuario";
+                        if ($resultado > 0){
 
-                      $resultado = mysqli_query($link,$sql);
+                        $var = $resultado[0];
+                        $nome_curso = $var[2];
 
-                      if($resultado){
-
-                        while($registro = mysqli_fetch_array($resultado,MYSQLI_ASSOC)){
-                          echo $registro['nome_curso'];
-                        }
-
-                      }else{
-                        echo 'Erro na consulta';
+                        echo $nome_curso;
                       }
-                      ?> 
+                      else{
+                        header('Location: home.php?page=cadastrar_perfil');
+                      }
+
+                    ?>
+                      
                     </p></span>
                     <div class="clearfix"></div>
                     <div class="bot-border"></div>
@@ -174,231 +166,253 @@ if($_GET['page']==''){
 
 
                   <div class="col-sm-5 col-xs-6 tital " >Nome:</div><div class="col-sm-7 col-xs-5 "><span id="nome">
+                  
                   <?php 
-                  require_once("db.class.php");                       
-                  $id_usuario = $_SESSION['id_usuario'];
-                  $objDb = new db();
-                  $link = $objDb->conecta_mysql();
 
-                  $sql = "SELECT nome FROM perfil WHERE id_usuario = $id_usuario";
+                      require_once('controller/usuariosController.php');
 
-                  $resultado = mysqli_query($link,$sql);
+                      $id_usuario = $_SESSION['id_usuario'];
+                                  
+                      $resultado = retornaInfoUsuario($id_usuario);
 
-                  if($resultado){
+                        if ($resultado > 0){
 
-                    while($registro = mysqli_fetch_array($resultado,MYSQLI_ASSOC)){
-                      echo $registro['nome'];
-                    }
+                        $var = $resultado[0];
+                        $nome = $var[0];
 
-                  }else{
-                    echo 'Erro na consulta';
-                  }
-                  ?> 
+                        echo $nome;
+                      }
+                      else{
+                        header('Location: home.php?page=cadastrar_perfil');
+                      }
+
+                  ?>
+
                 </span></div>
                 <div class="clearfix"></div>
                 <div class="bot-border"></div>
 
-                <div class="col-sm-5 col-xs-6 tital " >Sobrenome:</div><div class="col-sm-7"> <span id="sobrenome"><?php 
-                require_once("db.class.php");                       
-                $id_usuario = $_SESSION['id_usuario'];
-                $objDb = new db();
-                $link = $objDb->conecta_mysql();
+                <div class="col-sm-5 col-xs-6 tital " >Sobrenome:</div><div class="col-sm-7"> <span id="sobrenome">
+                
+                <?php 
 
-                $sql = "SELECT sobrenome FROM perfil WHERE id_usuario = $id_usuario";
+                      require_once('controller/usuariosController.php');
 
-                $resultado = mysqli_query($link,$sql);
+                      $id_usuario = $_SESSION['id_usuario'];
+                                  
+                      $resultado = retornaInfoUsuario($id_usuario);
 
-                if($resultado){
+                        if ($resultado > 0){
 
-                  while($registro = mysqli_fetch_array($resultado,MYSQLI_ASSOC)){
-                    echo $registro['sobrenome'];
-                  }
+                        $var = $resultado[0];
+                        $sobrenome = $var[1];
 
-                }else{
-                  echo 'Erro na consulta';
-                }
-                ?> </span></div>
+                        echo $sobrenome;
+                      }
+                      else{
+                        header('Location: home.php?page=cadastrar_perfil');
+                      }
+
+                ?> 
+                
+                </span></div>
                 <div class="clearfix"></div>
                 <div class="bot-border"></div>
 
                 <div class="col-sm-5 col-xs-6 tital " >Data Nascimento:</div><div class="col-sm-7"><span id="dataNasc">
+                
                 <?php 
-                require_once("db.class.php");                       
-                $id_usuario = $_SESSION['id_usuario'];
-                $objDb = new db();
-                $link = $objDb->conecta_mysql();
 
-                $sql = "SELECT data_nascimento FROM perfil WHERE id_usuario = $id_usuario";
+                      require_once('controller/usuariosController.php');
 
-                $resultado = mysqli_query($link,$sql);
+                      $id_usuario = $_SESSION['id_usuario'];
+                                  
+                      $resultado = retornaInfoUsuario($id_usuario);
 
-                if($resultado){
+                        if ($resultado > 0){
 
-                  while($registro = mysqli_fetch_array($resultado,MYSQLI_ASSOC)){
-                    echo $registro['data_nascimento'];
-                  }
+                        $var = $resultado[0];
+                        $data_nascimento = $var[8];
 
-                }else{
-                  echo 'Erro na consulta';
-                }
-                ?> 
+                        echo $data_nascimento;
+                      }
+                      else{
+                        header('Location: home.php?page=cadastrar_perfil');
+                      }
+
+                ?>  
+
               </span></div>
               <div class="clearfix"></div>
               <div class="bot-border"></div>
 
               <div class="col-sm-5 col-xs-6 tital ">Genêro:</div><div class="col-sm-7"><span id="genero">
+
               <?php 
-              require_once("db.class.php");                       
-              $id_usuario = $_SESSION['id_usuario'];
-              $objDb = new db();
-              $link = $objDb->conecta_mysql();
 
-              $sql = "SELECT genero FROM perfil WHERE id_usuario = $id_usuario";
+                      require_once('controller/usuariosController.php');
 
-              $resultado = mysqli_query($link,$sql);
+                      $id_usuario = $_SESSION['id_usuario'];
+                                  
+                      $resultado = retornaInfoUsuario($id_usuario);
 
-              if($resultado){
+                        if ($resultado > 0){
 
-                while($registro = mysqli_fetch_array($resultado,MYSQLI_ASSOC)){
-                  echo $registro['genero'];
-                }
+                        $var = $resultado[0];
+                        $genero = $var[9];
 
-              }else{
-                echo 'Erro na consulta';
-              }
-              ?> 
+                        echo $genero;
+                      }
+                      else{
+                        header('Location: home.php?page=cadastrar_perfil');
+                      }
+
+                ?>  
+
             </span></div>
 
             <div class="clearfix"></div>
             <div class="bot-border"></div>
 
             <div class="col-sm-5 col-xs-6 tital ">País:</div><div class="col-sm-7"><span id="pais"></span>
-            <?php 
-            require_once("db.class.php");                       
-            $id_usuario = $_SESSION['id_usuario'];
-            $objDb = new db();
-            $link = $objDb->conecta_mysql();
 
-            $sql = "SELECT p.SL_NOME_PT FROM pais as p JOIN perfil as q on (q.id_pais = p.SL_ID) WHERE q.id_usuario = $id_usuario";
+                <?php 
 
-            $resultado = mysqli_query($link,$sql);
+                      require_once('controller/usuariosController.php');
 
-            if($resultado){
+                      $id_usuario = $_SESSION['id_usuario'];
+                                  
+                      $resultado = retornaInfoUsuario($id_usuario);
 
-              while($registro = mysqli_fetch_array($resultado,MYSQLI_ASSOC)){
-                echo $registro['SL_NOME_PT'];
-              }
+                        if ($resultado > 0){
 
-            }else{
-              echo 'Erro na consulta';
-            }
-            ?> 
+                        $var = $resultado[0];
+                        $pais = $var[7];
+
+                        echo $pais;
+                      }
+                      else{
+                        header('Location: home.php?page=cadastrar_perfil');
+                      }
+
+                ?>  
+
           </div>
 
           <div class="clearfix"></div>
           <div class="bot-border"></div>
 
           <div class="col-sm-5 col-xs-6 tital " >Estado:</div><div class="col-sm-7"><span id="estado">
-          <?php 
-          require_once("db.class.php");                       
-          $id_usuario = $_SESSION['id_usuario'];
-          $objDb = new db();
-          $link = $objDb->conecta_mysql();
 
-          $sql = "SELECT e.UF_NOME FROM estado as e JOIN perfil as p on (p.id_estado = e.UF_ID) WHERE p.id_usuario = $id_usuario";
+                <?php 
 
-          $resultado = mysqli_query($link,$sql);
+                      require_once('controller/usuariosController.php');
 
-          if($resultado){
+                      $id_usuario = $_SESSION['id_usuario'];
+                                  
+                      $resultado = retornaInfoUsuario($id_usuario);
 
-            while($registro = mysqli_fetch_array($resultado,MYSQLI_ASSOC)){
-              echo $registro['UF_NOME'];
-            }
+                        if ($resultado > 0){
 
-          }else{
-            echo 'Erro na consulta';
-          }
-          ?> 
+                        $var = $resultado[0];
+                        $estado = $var[6];
+
+                        echo $estado;
+                      }
+                      else{
+                        header('Location: home.php?page=cadastrar_perfil');
+                      }
+
+                ?>  
+
         </span></div>
 
         <div class="clearfix"></div>
         <div class="bot-border"></div>
 
-        <div class="col-sm-5 col-xs-6 tital " >Cidade:</div><div class="col-sm-7"><span id="cidade"><?php 
-        require_once("db.class.php");                       
-        $id_usuario = $_SESSION['id_usuario'];
-        $objDb = new db();
-        $link = $objDb->conecta_mysql();
+        <div class="col-sm-5 col-xs-6 tital " >Cidade:</div><div class="col-sm-7"><span id="cidade">
+        
+                <?php 
 
-        $sql = "SELECT c.CT_NOME FROM cidade as c JOIN perfil as p on (p.id_cidade = c.CT_ID) WHERE p.id_usuario = $id_usuario";
+                      require_once('controller/usuariosController.php');
 
-        $resultado = mysqli_query($link,$sql);
+                      $id_usuario = $_SESSION['id_usuario'];
+                                  
+                      $resultado = retornaInfoUsuario($id_usuario);
 
-        if($resultado){
+                        if ($resultado > 0){
 
-          while($registro = mysqli_fetch_array($resultado,MYSQLI_ASSOC)){
-            echo $registro['CT_NOME'];
-          }
+                        $var = $resultado[0];
+                        $cidade = $var[3];
 
-        }else{
-          echo 'Erro na consulta';
-        }
-        ?> </span></div>
+                        echo $cidade;
+                      }
+                      else{
+                        header('Location: home.php?page=cadastrar_perfil');
+                      }
 
-        <div class="clearfix"></div>
-        <div class="bot-border"></div>
-
-        <div class="col-sm-5 col-xs-6 tital " >Curso:</div><div class="col-sm-7"><span id="idcurso"><?php 
-        require_once("db.class.php");                       
-        $id_usuario = $_SESSION['id_usuario'];
-        $objDb = new db();
-        $link = $objDb->conecta_mysql();
-
-        $sql = "SELECT c.nome_curso FROM perfil as p JOIN curso as c on (c.id_curso = p.id_curso) WHERE p.id_usuario = $id_usuario";
-
-        $resultado = mysqli_query($link,$sql);
-
-        if($resultado){
-
-          while($registro = mysqli_fetch_array($resultado,MYSQLI_ASSOC)){
-            echo $registro['nome_curso'];
-          }
-
-        }else{
-          echo 'Erro na consulta';
-        }
-        ?> </span></div>
+                ?>
+        
+        </span></div>
 
         <div class="clearfix"></div>
         <div class="bot-border"></div>
 
-        <div class="col-sm-5 col-xs-6 tital " >Semestre:</div><div class="col-sm-7"><span id="Semestre"><?php 
-        require_once("db.class.php");                       
-        $id_usuario = $_SESSION['id_usuario'];
-        $objDb = new db();
-        $link = $objDb->conecta_mysql();
+        <div class="col-sm-5 col-xs-6 tital " >Curso:</div><div class="col-sm-7"><span id="idcurso">
+        
+                <?php 
 
-        $sql = "SELECT s.semestre FROM perfil as p JOIN semestre as s on (s.id_semestre = p.id_semestre) WHERE p.id_usuario = $id_usuario";
+                      require_once('controller/usuariosController.php');
 
-        $resultado = mysqli_query($link,$sql);
+                      $id_usuario = $_SESSION['id_usuario'];
+                                  
+                      $resultado = retornaInfoUsuario($id_usuario);
 
-        if($resultado){
+                        if ($resultado > 0){
 
-          while($registro = mysqli_fetch_array($resultado,MYSQLI_ASSOC)){
-            echo $registro['semestre'];
-          }
+                        $var = $resultado[0];
+                        $nome_curso = $var[2];
 
-        }else{
-          echo 'Erro na consulta';
-        }
-        ?> </span></div>
+                        echo $nome_curso;
+                      }
+                      else{
+                        header('Location: home.php?page=cadastrar_perfil');
+                      }
+                ?>
+        
+        </span></div>
+
+        <div class="clearfix"></div>
+        <div class="bot-border"></div>
+
+        <div class="col-sm-5 col-xs-6 tital " >Semestre:</div><div class="col-sm-7"><span id="Semestre">
+        
+                <?php
+                      require_once('controller/usuariosController.php');
+
+                      $id_usuario = $_SESSION['id_usuario'];
+                                  
+                      $resultado = retornaInfoUsuario($id_usuario);
+
+                        if ($resultado > 0){
+
+                        $var = $resultado[0];
+                        $semestre = $var[4];
+
+                        echo $semestre;
+                      }
+                      else{
+                        header('Location: home.php?page=cadastrar_perfil');
+                      }
+                ?> 
+        
+        </span></div>
 
         <!-- /.box-body -->
       </div>
       <!-- /.box -->
 
     </div>
-
 
   </div> 
 </div>

@@ -1,42 +1,22 @@
 <?php 
-require_once('db.class.php');
+require_once('controller/usuariosController.php');
+
 session_start();
 $usuario = $_SESSION['usuario'];
 if(!isset($_SESSION['usuario'])){
 	header('Location: index.php?erro=1');
 }
 
-$objDb = new db();
-$link = $objDb->conecta_mysql();
-$sql = "SELECT * FROM usuarios as u INNER JOIN perfil AS p ON (u.id = p.id_usuario) WHERE u.usuario = '$usuario'";
-$retorno_select = mysqli_query($link,$sql);
-
 if($_GET['page']==''){
 	header('Location: home.php?page=pagina_inicial');
 }
 
-if($retorno_select && $_GET['page']=='cadastrar_perfil'){	
-    
-    $dados_perfil = mysqli_fetch_array($retorno_select);    
-    
-    if(isset($dados_perfil['usuario'])){      
-        header('Location: home.php?page=pagina_inicial');
-    }
-    
+if(verificaCadastroPerfil($usuario) && $_GET['page']=='cadastrar_perfil'){	   
+        header('Location: home.php?page=pagina_inicial');    
 }
-
-if($retorno_select && $_GET['page']!='cadastrar_perfil'){	
-    
-    $dados_perfil = mysqli_fetch_array($retorno_select);    
-    
-    if(!isset($dados_perfil['usuario'])){      
-        header('Location: home.php?page=cadastrar_perfil');
-    }
-    
+if(!verificaCadastroPerfil($usuario) && $_GET['page']!='cadastrar_perfil'){
+	header('Location: home.php?page=cadastrar_perfil');
 }
-
-
-
 
 ?>
 
@@ -122,21 +102,16 @@ if($retorno_select && $_GET['page']!='cadastrar_perfil'){
 											<i class="fa fa-bell" aria-hidden="true"></i>
 											<span class="label label-primary">
 												<?php 
-												
+												require_once('controller/usuariosController.php');
+
 												if(!isset($_SESSION['usuario'])){
 													header('Location: index.php?erro=1');
 												}
-												require_once('db.class.php');
-												$count =0;
 												$id_usuario = $_SESSION['id_usuario'];
-												$objDb = new db();
-												$link = $objDb->conecta_mysql();
-												$count = mysqli_query($link," SELECT COUNT(id_usuario) as total FROM convite where id_amigo	 = $id_usuario");
-												$c = mysqli_fetch_array($count);					
-												$count = mysqli_query($link," SELECT COUNT(id_usuario) as total FROM resposta_convite where id_amigo = $id_usuario");
-												$c2 = mysqli_fetch_array($count);
-												$count = $c['total'] + $c2['total'] ;
-												echo $count;
+
+												$aux = verificaQtdNotificacao($id_usuario);
+
+												echo $aux;
 												?>
 											</span>
 										</a>
@@ -211,30 +186,20 @@ if($retorno_select && $_GET['page']!='cadastrar_perfil'){
 <div class="col-md-1" style="margin-right: 5px;">
 <img class="img-circle" width="50" height="50" 
 
-<?php
-                         require_once('db.class.php');
+						<?php
+						require_once('controller/usuariosController.php');
 
-                         $id_usuario = $_SESSION['id_usuario'];
-                         $objDb = new db();
-                         $link = $objDb->conecta_mysql();
+                        $id_usuario = $_SESSION['id_usuario'];
 
-                         $sql = " SELECT * FROM img_perfil where id_usuario = $id_usuario";
+                        if (verificaImagemPerfil($id_usuario)){
 
-                         $resultado_id = mysqli_query($link,$sql);
+							$img = retornaImagemPerfil($id_usuario);
 
-                        if (mysqli_num_rows($resultado_id)>0){
+                            echo 'src="imagens/users/'.$id_usuario.'/'.$img.'"'; 
 
-                          while($registro = mysqli_fetch_array($resultado_id,MYSQLI_ASSOC)){  
-
-                           echo 'src="imagens/users/'.$registro['id_usuario'].'/'.$registro['img'].'"'; 
-                           
-                         }
-
-                       }else{
-                        echo 'src="imagens/users/user_img.jpg"';
-                      }
-
-
+                        }else{
+                        	echo 'src="imagens/users/user_img.jpg"';
+                        }
 
                       ?>
 

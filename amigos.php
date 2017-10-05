@@ -1,6 +1,5 @@
 <?php
 
-require_once('db.class.php');
 $usuario = $_SESSION['usuario'];
 if(!isset($_SESSION['usuario'])){
 	header('Location: index.php?erro=1');

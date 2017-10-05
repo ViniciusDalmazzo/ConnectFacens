@@ -1,9 +1,9 @@
-﻿-- phpMyAdmin SQL Dump
+-- phpMyAdmin SQL Dump
 -- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 03-Out-2017 às 19:04
+-- Generation Time: 04-Out-2017 às 22:20
 -- Versão do servidor: 10.1.26-MariaDB
 -- PHP Version: 7.1.9
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `connectfacens2`
+-- Database: `connectfacens`
 --
 
 -- --------------------------------------------------------
@@ -5655,6 +5655,21 @@ INSERT INTO `cidade` (`CT_ID`, `CT_NOME`, `CT_UF`, `CT_IBGE`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `comentarios`
+--
+
+CREATE TABLE `comentarios` (
+  `id_comentario` int(11) NOT NULL,
+  `id_usuario` int(11) NOT NULL,
+  `id_post` int(11) NOT NULL,
+  `comentario` varchar(500) NOT NULL,
+  `img_comentario` varchar(100) DEFAULT NULL,
+  `data_comentario` datetime DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `convite`
 --
 
@@ -5754,6 +5769,14 @@ CREATE TABLE `img_perfil` (
   `id_perfil` int(11) DEFAULT NULL,
   `img` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `img_perfil`
+--
+
+INSERT INTO `img_perfil` (`id_img_perfil`, `id_usuario`, `id_perfil`, `img`) VALUES
+(43, 1, 46, 'img_perfil_user_1.png'),
+(44, 34, 47, 'img_perfil_user_34.png');
 
 -- --------------------------------------------------------
 
@@ -6053,6 +6076,14 @@ CREATE TABLE `perfil` (
   `data_cadastro_perfil` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Extraindo dados da tabela `perfil`
+--
+
+INSERT INTO `perfil` (`id_perfil`, `id_usuario`, `id_img_perfil`, `nome`, `sobrenome`, `data_nascimento`, `id_pais`, `id_estado`, `id_cidade`, `genero`, `id_curso`, `id_semestre`, `data_cadastro_perfil`) VALUES
+(46, 1, NULL, 'Vinicius', 'Dalmazzo', '1970-01-01', 1, 8, 1568, 'Masculino', 4, 6, '2017-10-03 15:24:06'),
+(47, 34, NULL, 'Teste', '32131', '1970-01-01', 1, 16, 2420, 'Masculino', 5, 8, '2017-10-03 15:24:27');
+
 -- --------------------------------------------------------
 
 --
@@ -6081,6 +6112,14 @@ CREATE TABLE `resposta_convite` (
   `resposta` bit(1) NOT NULL,
   `data_resposta_convite` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `resposta_convite`
+--
+
+INSERT INTO `resposta_convite` (`id_resposta_convite`, `id_usuario`, `id_amigo`, `resposta`, `data_resposta_convite`) VALUES
+(4, 1, 34, b'1111111111111111111111111111111', '2017-10-03 15:25:55'),
+(6, 1, 34, b'1111111111111111111111111111111', '2017-10-03 19:07:17');
 
 -- --------------------------------------------------------
 
@@ -6171,6 +6210,13 @@ ALTER TABLE `cidade`
   ADD PRIMARY KEY (`CT_ID`);
 
 --
+-- Indexes for table `comentarios`
+--
+ALTER TABLE `comentarios`
+  ADD PRIMARY KEY (`id_comentario`),
+  ADD KEY `fk_post_comentario` (`id_post`);
+
+--
 -- Indexes for table `convite`
 --
 ALTER TABLE `convite`
@@ -6248,7 +6294,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT for table `amizade`
 --
 ALTER TABLE `amizade`
-  MODIFY `id_amizade` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_amizade` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `cidade`
@@ -6257,10 +6303,16 @@ ALTER TABLE `cidade`
   MODIFY `CT_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5611;
 
 --
+-- AUTO_INCREMENT for table `comentarios`
+--
+ALTER TABLE `comentarios`
+  MODIFY `id_comentario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
 -- AUTO_INCREMENT for table `convite`
 --
 ALTER TABLE `convite`
-  MODIFY `id_convite` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_convite` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `curso`
@@ -6278,7 +6330,7 @@ ALTER TABLE `estado`
 -- AUTO_INCREMENT for table `img_perfil`
 --
 ALTER TABLE `img_perfil`
-  MODIFY `id_img_perfil` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id_img_perfil` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `pais`
@@ -6290,19 +6342,19 @@ ALTER TABLE `pais`
 -- AUTO_INCREMENT for table `perfil`
 --
 ALTER TABLE `perfil`
-  MODIFY `id_perfil` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `id_perfil` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `post`
 --
 ALTER TABLE `post`
-  MODIFY `id_post` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_post` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `resposta_convite`
 --
 ALTER TABLE `resposta_convite`
-  MODIFY `id_resposta_convite` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_resposta_convite` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `semestre`
@@ -6325,6 +6377,12 @@ ALTER TABLE `usuarios`
 --
 ALTER TABLE `amizade`
   ADD CONSTRAINT `fk_amizade_usuarios` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`);
+
+--
+-- Limitadores para a tabela `comentarios`
+--
+ALTER TABLE `comentarios`
+  ADD CONSTRAINT `fk_post_comentario` FOREIGN KEY (`id_post`) REFERENCES `post` (`id_post`);
 
 --
 -- Limitadores para a tabela `convite`

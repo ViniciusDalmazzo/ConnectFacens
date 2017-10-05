@@ -1,5 +1,7 @@
 <?php
 
+function valida()
+{
 session_start();
 require_once('db.class.php');
 $usuario = $_POST['usuario'];
@@ -38,6 +40,8 @@ if($retorno_select){
     }
 }else{
     echo 'Erro na consulta com o banco de dados!';
+}
+
 }
 
 
