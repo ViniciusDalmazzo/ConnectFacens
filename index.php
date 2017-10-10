@@ -35,8 +35,7 @@ $erro_email = isset($_GET['erro_email']) ? $_GET['erro_email'] : 0;
     <div id="login">   
       <h1>Bem-Vindo!</h1>
 
-      <form action="valida_usuario.php" method="post" id="login_form">
-
+     <form action="valida_usuario.php" method="post" id="login_form">';      
         <div class="field-wrap">
           <label>
             Usuário<span class="req">*</span>
@@ -77,7 +76,8 @@ $erro_email = isset($_GET['erro_email']) ? $_GET['erro_email'] : 0;
 
     <div id="signup">   
       <h1>Cadastre-se Grátis</h1>
-
+      
+      
       <form action="registra_usuario.php" method="post" id="registration_form">
 
         <div>
@@ -94,7 +94,7 @@ $erro_email = isset($_GET['erro_email']) ? $_GET['erro_email'] : 0;
 
             if($erro_usuario == 1){?>
             <div style="text-align: center;padding: 10px;margin-bottom: -40px;">
-              echo '<font color="red">Usuário já cadastrado</font>';
+              <font color="red">Usuário já cadastrado</font>
             </div>
             <?php     }       
 
@@ -122,7 +122,7 @@ $erro_email = isset($_GET['erro_email']) ? $_GET['erro_email'] : 0;
 
             if($erro_email == 1){?>
             <div style="text-align: center;padding: 10px;margin-bottom: -40px;">
-              echo '<font color="red">Email já cadastrado</font>';
+              <font color="red">Email já cadastrado</font>
             </div>
             <?php     }       
 
