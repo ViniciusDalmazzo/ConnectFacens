@@ -159,8 +159,9 @@ if($_GET['page']==''){
                     <div class="bot-border"></div>
                     <br>
                     <a href="home.php?page=editar_perfil" class="button">Editar perfil</a>
-
+                    <br>  <br>
                   </div>
+                
                   <div class="clearfix"></div>
                   <hr style="margin:5px 0 5px 0;">
 

@@ -70,7 +70,7 @@ if (!verificaCadastroPerfil($usuario) && $_GET['page']!='cadastrar_perfil') {
         <!-- NAVBAR -->
         <nav class="navbar navbar-default navbar-fixed-top">
         <div class="brand">
-                <a href="index.html"><img src="imagens/logo_site.png" alt="Connect Facens" class="img-responsive logo"></a>
+                <a href="home.php?page=pagina_inicial"><img src="imagens/logo_site.png" alt="Connect Facens" class="img-responsive logo"></a>
             </div>
             <div class="container-fluid"  style="margin-top: 20px;">
                 <div class="navbar-btn">
@@ -152,7 +152,7 @@ if (!verificaCadastroPerfil($usuario) && $_GET['page']!='cadastrar_perfil') {
                                 $img = retornaImagemPerfil($id_usuario);
                                 echo 'src="imagens/users/'.$id_usuario.'/'.$img.'"';
                             } else {
-                                echo 'src="imagens/users/user_img.jpg"';
+                                echo 'src="imagens/users/user_img.png"';
                             }
 ?>
  class="img-circle" alt="Usuário"> <span> 
@@ -177,7 +177,7 @@ if (!verificaCadastroPerfil($usuario) && $_GET['page']!='cadastrar_perfil') {
                         
                         </span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
                             <ul class="dropdown-menu">
-                                <li><a href="home.php?page=meu_perfil"><i class="lnr lnr-user"></i> <span>Meu Perfil</span></a></li>
+                                <li><a href="home.php?page=ver_perfil"><i class="lnr lnr-user"></i> <span>Meu Perfil</span></a></li>
                                 
                                 <li><a href="sair.php"><i class="lnr lnr-exit"></i> <span>Sair</span></a></li>
                             </ul>
@@ -280,7 +280,7 @@ if (!verificaCadastroPerfil($usuario) && $_GET['page']!='cadastrar_perfil') {
         $img = retornaImagemPerfil($id_usuario);
         echo 'src="imagens/users/'.$id_usuario.'/'.$img.'"';
     } else {
-        echo 'src="imagens/users/user_img.jpg"';
+        echo 'src="imagens/users/user_img.png"';
     }
 ?>
 

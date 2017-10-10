@@ -159,4 +159,19 @@
         return $retorno;
     }
 
+    function retornaDadosVerPost($id_post){
+
+        $objDb = new db();
+
+        $link = $objDb->conecta_mysql();
+        
+        
+        $sql = " SELECT DATE_FORMAT(t.data_inclusao, '%d %b %Y') AS data_inclusao,t.id_usuario as p_usuario, t.post,t.img_post,t.id_post, u.nome,u.sobrenome,u.id_usuario,t.titulo,i.id_usuario,i.img FROM post AS t JOIN perfil AS u ON (t.id_usuario = u.id_usuario) JOIN img_perfil as i on (u.id_usuario = i.id_usuario) WHERE t.id_post = $id_post ORDER BY t.data_inclusao DESC ";
+        
+        $resultado = mysqli_query($link, $sql);
+        $retorno = $resultado->fetch_all();
+
+        return $retorno;
+    }
+
 ?>

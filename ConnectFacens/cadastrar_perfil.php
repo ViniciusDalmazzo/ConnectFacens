@@ -35,7 +35,7 @@ if($_GET['page']==''){
                             echo 'src="imagens/users/'.$id_usuario.'/'.$img.'"'; 
 
                         }else{
-                        	echo 'src="imagens/users/user_img.jpg"';
+                        	echo 'src="imagens/users/user_img.png"';
                         }
 
                 ?>
