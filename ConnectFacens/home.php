@@ -1,23 +1,19 @@
 <?php
 require_once('controller/usuariosController.php');
-
 session_start();
 $usuario = $_SESSION['usuario'];
 if (!isset($_SESSION['usuario'])) {
     header('Location: index.php?erro=1');
 }
-
 if ($_GET['page']=='') {
     header('Location: home.php?page=pagina_inicial');
 }
-
 if (verificaCadastroPerfil($usuario) && $_GET['page']=='cadastrar_perfil') {
         header('Location: home.php?page=pagina_inicial');
 }
 if (!verificaCadastroPerfil($usuario) && $_GET['page']!='cadastrar_perfil') {
     header('Location: home.php?page=cadastrar_perfil');
 }
-
 ?>
 
 <<!doctype html>
@@ -32,7 +28,6 @@ if (!verificaCadastroPerfil($usuario) && $_GET['page']!='cadastrar_perfil') {
         }
                                                 $id_usuario = $_SESSION['id_usuario'];
                                                 $aux = verificaQtdNotificacao($id_usuario);
-
         if ($aux!=0) {
             echo "($aux)";
         }
@@ -128,17 +123,13 @@ if (!verificaCadastroPerfil($usuario) && $_GET['page']!='cadastrar_perfil') {
                         <li><button type="button" style="margin-top: 22px;" class="btn btn-primary add-project" 
                         <?php
                         require_once('controller/usuariosController.php');
-
                         $id_usuario = $_SESSION['id_usuario'];
                                   
                         $resultado = retornaInfoUsuario($id_usuario);
-
                         if (count($resultado) <= 0) {
                             echo 'disabled'; 
                         }
                                                   
-
-
                         ?> 
                          data-toggle="modal" data-target="#add_project">Adicionar Postagem</button>
                         
@@ -157,23 +148,7 @@ if (!verificaCadastroPerfil($usuario) && $_GET['page']!='cadastrar_perfil') {
 ?>
  class="img-circle" alt="Usuário"> <span> 
  
-    <?php
-
-                      require_once('controller/usuariosController.php');
-
-                      $id_usuario = $_SESSION['id_usuario'];
-                                  
-                      $resultado = retornaInfoUsuario($id_usuario);
-
-    if (count($resultado) > 0) {
-        $var = $resultado[0];
-        $nome = $var[0];
-
-        echo $nome;
-    } else {
-    }
-
-                        ?>
+    
                         
                         </span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
                             <ul class="dropdown-menu">
@@ -192,11 +167,12 @@ if (!verificaCadastroPerfil($usuario) && $_GET['page']!='cadastrar_perfil') {
         <div id="sidebar-nav" class="sidebar">
             <div class="sidebar-scroll">
                 <nav>
-                    <ul class="nav">
-                        <li><a href="home.php?page=pagina_inicial" style="margin-top: 10px;" class="active"><i class="fa fa-home"></i> <span>Inicio</span></a></li>
-                        <li><a href="home.php?page=amigos" class=""><i class="fa fa-users"></i> <span>Amigos</span></a></li>
-                        <li><a href="home.php?page=ver_perfil" class=""><i class="fa fa-user"></i> <span>Meu Perfil</span></a></li>
-                        <li><a href="#" class=""><i class="fa fa-cog"></i> <span>Configuração</span></a></li>                       
+                    <ul class="nav" id="categories">
+                        <li><a href="home.php?page=pagina_inicial" style="margin-top: 10px;" <?php $page = $_GET['page']; echo (($page == 'pagina_inicial' or $page== 'ver_post') ? ' class="active"' : ''); ?>
+                        ><i class="fa fa-home"></i> <span>Inicio</span></a></li>
+                        <li><a href="home.php?page=amigos" <?php $page = $_GET['page']; echo (($page == 'amigos' or $page == 'ver_perfil_usuario') ? ' class="active"' : ''); ?> ><i class="fa fa-users"></i> <span>Amigos</span></a></li>
+                        <li><a href="home.php?page=ver_perfil" <?php $page = $_GET['page']; echo (($page == 'ver_perfil' or $page == 'editar_perfil' or $page == 'cadastrar_perfil') ? ' class="active"' : ''); ?> ><i class="fa fa-user"></i> <span>Meu Perfil</span></a></li>
+                        <li><a href="#" ><i class="fa fa-cog"></i> <span>Configuração</span></a></li>                       
                         <li>
                             <a href="#subPages" data-toggle="collapse" class="collapsed"><i class="fa fa-external-link"></i> <span>Links</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
                             <div id="subPages" class="collapse ">
@@ -211,6 +187,8 @@ if (!verificaCadastroPerfil($usuario) && $_GET['page']!='cadastrar_perfil') {
                 </nav>
             </div>
         </div>
+
+       
         <!-- END LEFT SIDEBAR -->
         <!-- MAIN -->
         <div class="main">
@@ -222,12 +200,10 @@ if (!verificaCadastroPerfil($usuario) && $_GET['page']!='cadastrar_perfil') {
                     <div id="div_home">                 
                     
                     <?php
-
                     if (isset($_GET['page'])) {
                         $p = $_GET['page'];
                         include($p.".php");
                     }
-
                     ?>
                    
 
@@ -240,7 +216,7 @@ if (!verificaCadastroPerfil($usuario) && $_GET['page']!='cadastrar_perfil') {
         <div class="clearfix"></div>
         <footer>
             <div class="container-fluid">
-                <p class="copyright">&copy; 2017 <a href="wwww.connectfacens.com.br" target="_blank">Connect Facens</a>. Todos direitos reservados.</p>
+                <p class="copyright">&copy; 2017 <a href="http://connectfacens.com.br/" target="_blank">Connect Facens</a>. Todos direitos reservados.</p>
             </div>
         </footer>
     </div>

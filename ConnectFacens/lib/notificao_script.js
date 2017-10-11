@@ -2,7 +2,6 @@ $(document).ready(function(){
 
 	
 	
-	
 	function atualizaNotificacao(){
 		
 		$.ajax({
@@ -24,6 +23,7 @@ $(document).ready(function(){
 						success: function(data){
 							
 							atualizaNotificacao();
+						location.reload();
 
 						}
 
@@ -42,6 +42,7 @@ $(document).ready(function(){
 						success: function(data){
 							
 							atualizaNotificacao();
+							location.reload();
 
 						}
 
@@ -61,6 +62,7 @@ $(document).ready(function(){
 						success: function(data){
 							
 							atualizaNotificacao();
+							location.reload();
 
 						}
 

@@ -1,6 +1,7 @@
-<?php
+ <?php
 
 $usuario = $_SESSION['usuario'];
+
 if (!isset($_SESSION['usuario'])) {
     header('Location: index.php?erro=1');
 }
@@ -9,7 +10,7 @@ if ($_GET['page']=='') {
     header('Location: home.php?page=pagina_inicial');
 }
 
-?>
+ ?>
 
 <div class="user-dashboard">
                         <h1>Seja Bem Vindo, 
@@ -29,7 +30,7 @@ if ($_GET['page']=='') {
 
                             echo ''.$nome.'&nbsp;'.$sobrenome.'';
                         } else {
-                            header('Location: home.php?page=cadastrar_perfil');
+                           
                         }
 
                         ?>

@@ -36,11 +36,11 @@ if($resultado){
                     $id_post = $var[4];
                     $nome_usuario = $var[5];
                     $sobrenome_usuario = $var[6];
-                    $titulo = $var[8];
-                    $img_perfil = $var[10];
+                    $titulo = $var[7];
+                    $img_perfil = $var[8];
                   
 
-                    if (isset($img)) {
+                    if ($img=='') {
                         echo '<div class="sales report list-group-item btn_comment " >';
                         echo '<div class="btn-group pull-right">		
                         <button class="btn btn-primary btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -48,16 +48,13 @@ if($resultado){
                         </button>
                         <div class="dropdown-menu">
                             <a href="home.php?page=ver_post&post='.$id_post.'">Denunciar Post</a>';
-                       
-                                                                    
-                        echo '</div>
-                </div>';
+                        echo '</div></div>';
                         echo '<h3 class="list-group-item-heading "><a href="home.php?page=ver_perfil_usuario&user='.$usuario.'"><img class="img-circle" width="50" height="50" src="imagens/users/'.$usuario.'/'.$img_perfil.'"></a><a href="home.php?page=ver_perfil_usuario&user='.$usuario.'">&nbsp;&nbsp;'.$nome_usuario.'&nbsp;'.$sobrenome_usuario.'</a></h3>';
                         
                         echo '<h5 align="center"><b>'.$titulo.'</b></h5>';
                         echo '<p align="center" style="margin-bottom: 20px;" class="list-group-item-text">'.$post.'</p>';
                         echo ' <small style="margin-left:93%;"> '.$data.'</small></div>';
-                    } else {
+                    }else {
                         echo '<div class="sales report list-group-item btn_comment " >';
                         echo '<div class="btn-group pull-right">		
                         <button class="btn btn-primary btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -65,31 +62,21 @@ if($resultado){
                         </button>
                         <div class="dropdown-menu">
                             <a href="home.php?page=ver_post&post='.$id_post.'">Denunciar Post</a>';
-            
-                        
-                                                                    
-                        echo '</div>
-                    </div>';
-                        echo '<h3 class="list-group-item-heading "><a href="home.php?page=ver_perfil_usuario&user='.$usuario.'"><img class="img-circle" width="50" height="50" src="imagens/users/'.$usuario.'/'.$img_perfil.'"></a><a href="home.php?page=ver_perfil_usuario&user='.$usuario.'">&nbsp;&nbsp;'.$nome_usuario.'&nbsp;'.$sobrenome_usuario.'</h3></a>';
+                        echo '</div></div>';
+                        echo '<h3 class="list-group-item-heading "><a href="home.php?page=ver_perfil_usuario&user='.$usuario.'"><img class="img-circle" width="50" height="50" src="imagens/users/'.$usuario.'/'.$img_perfil.'"></a><a href="home.php?page=ver_perfil_usuario&user='.$usuario.'">&nbsp;&nbsp;'.$nome_usuario.'&nbsp;'.$sobrenome_usuario.'</a></h3>';
                         
                         echo '<h5 align="center"><b>'.$titulo.'</b></h5>';
                         echo '<p align="center" class="list-group-item-text"><img class="img-thumbnail" width="300" height="300" src="imagens/posts/'.$img.'"></p>';
                         echo '<p align="center" style="margin-bottom: 20px;" class="list-group-item-text">'.$post.'</p>';
-                        echo '<small style="margin-left:93%;> '.$data.'</small></div>';
+                        echo ' <small style="margin-left:93%;"> '.$data.'</small></div>';
                     }
-
-
-                    
-                    
-                  
-    
                 }else{
                   echo 'Erro na consulta';
                 }
 
 
-?>
-<br>
+   ?>
+
 <br>
 
 <div id="div_escrever_comentario">
@@ -102,10 +89,10 @@ if($resultado){
     box-sizing: border-box;
     width: 100%;"></textarea><br><br>
 <input name="id_post" id="id_post" style="display:none"
-<?php $id_post = isset($_GET['post']) ? $_GET['post'] : 0;
+ <?php $id_post = isset($_GET['post']) ? $_GET['post'] : 0;
  echo 'value='.$id_post;
  echo '>';
-?>
+ ?>
 <input type="file" style="display: inline;
     width: 500px;
     margin-top: 5px;
@@ -132,3 +119,5 @@ if($resultado){
 </div>
 
 </div>
+<br>
+<br>

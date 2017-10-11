@@ -59,9 +59,9 @@ if (mysqli_num_rows($resultado_id)>0){
 		mkdir($newPath);
 	}
 	
-	$imagePath = "imagens/users/user_img.jpg";
+	$imagePath = "imagens/users/user_img.png";
 
-	$ext = '.jpg';
+	$ext = '.png';
 	$img_name = 'img_perfil_user_'.$id_usuario.$ext;
 	$newName  = $newPath.$img_name;
 	$copied = copy($imagePath , $newName);

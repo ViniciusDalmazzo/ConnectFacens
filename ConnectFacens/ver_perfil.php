@@ -125,7 +125,7 @@ if($_GET['page']==''){
                         echo ''.$nome.'&nbsp;'.$sobrenome.'';  
                       }
                       else{
-                        header('Location: home.php?page=cadastrar_perfil');
+                       
                       }
 
                       ?>
@@ -149,7 +149,7 @@ if($_GET['page']==''){
                         echo $nome_curso;
                       }
                       else{
-                        header('Location: home.php?page=cadastrar_perfil');
+                       
                       }
 
                     ?>
@@ -184,7 +184,7 @@ if($_GET['page']==''){
                         echo $nome;
                       }
                       else{
-                        header('Location: home.php?page=cadastrar_perfil');
+                       
                       }
 
                   ?>
@@ -211,7 +211,7 @@ if($_GET['page']==''){
                         echo $sobrenome;
                       }
                       else{
-                        header('Location: home.php?page=cadastrar_perfil');
+                      
                       }
 
                 ?> 
@@ -238,7 +238,7 @@ if($_GET['page']==''){
                         echo $data_nascimento;
                       }
                       else{
-                        header('Location: home.php?page=cadastrar_perfil');
+                      
                       }
 
                 ?>  
@@ -265,7 +265,7 @@ if($_GET['page']==''){
                         echo $genero;
                       }
                       else{
-                        header('Location: home.php?page=cadastrar_perfil');
+                       
                       }
 
                 ?>  
@@ -293,7 +293,7 @@ if($_GET['page']==''){
                         echo $pais;
                       }
                       else{
-                        header('Location: home.php?page=cadastrar_perfil');
+                      
                       }
 
                 ?>  
@@ -321,7 +321,7 @@ if($_GET['page']==''){
                         echo $estado;
                       }
                       else{
-                        header('Location: home.php?page=cadastrar_perfil');
+                        
                       }
 
                 ?>  
@@ -349,7 +349,7 @@ if($_GET['page']==''){
                         echo $cidade;
                       }
                       else{
-                        header('Location: home.php?page=cadastrar_perfil');
+                       
                       }
 
                 ?>
@@ -377,7 +377,7 @@ if($_GET['page']==''){
                         echo $nome_curso;
                       }
                       else{
-                        header('Location: home.php?page=cadastrar_perfil');
+                       
                       }
                 ?>
         
@@ -403,7 +403,7 @@ if($_GET['page']==''){
                         echo $semestre;
                       }
                       else{
-                        header('Location: home.php?page=cadastrar_perfil');
+                      
                       }
                 ?> 
         

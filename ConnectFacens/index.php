@@ -57,9 +57,7 @@ $erro_email = isset($_GET['erro_email']) ? $_GET['erro_email'] : 0;
           </div>
         </div>
 
-        <p class="forgot"><a href="#">Esqueci a senha</a></p>
-
-        <div style="font-size: 20px;text-align: center;margin-bottom: 15px;">
+              <div style="font-size: 20px;text-align: center;margin-bottom: 15px;">
           <?php
 
           if($erro == 1){
