@@ -1,70 +1,56 @@
 <?php
 
-require_once('db.class.php');
 $usuario = $_SESSION['usuario'];
-if(!isset($_SESSION['usuario'])){
-	header('Location: index.php?erro=1');
+if (!isset($_SESSION['usuario'])) {
+    header('Location: index.php?erro=1');
 }
 
-if($_GET['page']==''){
-	header('Location: home.php?page=pagina_inicial');
+if ($_GET['page']=='') {
+    header('Location: home.php?page=pagina_inicial');
 }
 
 ?>
 
 <div class="user-dashboard">
-						<h1>Seja bem vindo, 
+                        <h1>Seja Bem Vindo, 
 
-							<?php 
+                        <?php
 
-						require_once('db.class.php');
+                        require_once('controller/usuariosController.php');
 
                          $id_usuario = $_SESSION['id_usuario'];
-                         $objDb = new db();
-                         $link = $objDb->conecta_mysql();
+                        
+                         $resultado = retornaInfoUsuario($id_usuario);
 
-                         $sql = " SELECT * FROM perfil where id_usuario = $id_usuario";
+                        if ($resultado > 0) {
+                            $var = $resultado[0];
+                            $nome = $var[0];
+                            $sobrenome = $var[1];
 
-                         $resultado_id = mysqli_query($link,$sql);
+                            echo ''.$nome.'&nbsp;'.$sobrenome.'';
+                        } else {
+                            header('Location: home.php?page=cadastrar_perfil');
+                        }
 
-                        if (mysqli_num_rows($resultado_id)>0){
+                        ?>
+                        
+                        </h1>
+                        <div class="container">
 
-                          while($registro = mysqli_fetch_array($resultado_id,MYSQLI_ASSOC)){  
+                            <div class="panel panel-headline ">
 
-                           echo ''.$registro['nome'].'&nbsp;'.$registro['sobrenome'].''; 
-                           
-                         }
-
-                       }else{
-                        echo 'src="imagens/users/user_img.jpg"';
-                      }
-
-
-						?></h1>
-						<div class="container">
-
-							<div class="sales report ">
-								<h2>Postagens</h2>
-								<div class="btn-group">		
-									<button class="btn btn-secondary btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-										<span>Filtrar:</span>Tudo
-									</button>
-									<div class="dropdown-menu">
-										<a href="#">Curso</a>
-										<a href="#">Semestre</a>
-										<a href="#">Cidade</a>										
-									</div>
-								</div>
+                            <div class="panel-heading"><h2>Postagens</h2></div>
+						
+                            <div class="panel-body"><div id="posts" ></div>
+							
+							
 							</div>
-
-							<div id="posts" >
-
-							</div>
+                            
 
 
-						</div>
-					</div>
-				</div>
-			</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-		</div>
+        </div>

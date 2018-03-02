@@ -40,5 +40,4 @@ if($retorno_select){
     echo 'Erro na consulta com o banco de dados!';
 }
 
-
 ?>

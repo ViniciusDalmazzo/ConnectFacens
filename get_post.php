@@ -20,42 +20,41 @@ $resultado = mysqli_query($link,$sql);
 if($resultado){
 
 	while($registro = mysqli_fetch_array($resultado,MYSQLI_ASSOC)){
-		if($registro['img_post']==''){
-			echo '<div class="sales report list-group-item">';
-			echo '<div class="btn-group pull-right">		
-			<button class="btn btn-primary btn-lg dropdown-toggle drop_post" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		if($registro['img_post']==''){	
+			echo '<div class="panel"><div panel-heading>';
+			echo '<div class="btn-group pull-right"><li class="dropdown">	
+			<button class="btn btn-primary dropdown-toggle drop_post" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 				<span>Opções</span>
 			</button>
-			<div class="dropdown-menu">
-				<a href="home.php?page=ver_post&post='.$registro['id_post'].'">Ver Postagem</a>';
+			<ul class="dropdown-menu"><li>
+				<a href="home.php?page=ver_post&post='.$registro['id_post'].'">Ver Postagem</a></li>';
 				if($registro['p_usuario']==$id_usuario){
-                    echo '<a href="#" class="post_excluir" data-id_post="'.$registro['id_post'].'">Excluir</a>';
+                    echo '<li><a href="#" class="post_excluir" data-id_post="'.$registro['id_post'].'">Excluir</a></li>';
                 }					
-				echo '</div></div>';
+				echo '</li></div>';
 			echo '<h3 class="list-group-item-heading "><a href="home.php?page=ver_perfil_usuario&user='.$registro['id_usuario'].'"><img class="img-circle" width="50" height="50" src="imagens/users/'.$registro['id_usuario'].'/'.$registro['img'].'"></a><a href="home.php?page=ver_perfil_usuario&user='.$registro['id_usuario'].'">&nbsp;&nbsp;'.$registro['nome'].'&nbsp;'.$registro['sobrenome'].'</a></h3>';
-			echo '<h5 align="center"><b>'.$registro['titulo'].'</b></h5>';			
-			echo '<p align="center" style="margin-bottom: 20px;" class="list-group-item-text">'.$registro['post'].'</p>';
-			echo ' <small class="pull-right"> '.$registro['data_inclusao'].'</small></div>';
+			echo '<h5 align="center"><b>'.$registro['titulo'].'</b></h5></div>';			
+			echo '<div class="panel-body"><p align="center" style="margin-bottom: 20px;" class="list-group-item-text">'.$registro['post'].'</p></div>';
+			echo '<div class="panel-footer"> <small style="margin-left:93%;"> '.$registro['data_inclusao'].'</small></div></div>';
 		}else{
-			echo '<div class="sales report list-group-item" >';
-			echo '<div class="btn-group pull-right">		
-			<button class="btn btn-primary btn-lg dropdown-toggle drop_post" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		
+			echo '<div class="panel"><div panel-heading>';
+			echo '<div class="btn-group pull-right"><li class="dropdown">	
+			<button class="btn btn-primary dropdown-toggle drop_post" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 				<span>Opções</span>
 			</button>
-			<div class="dropdown-menu">
-				<a href="home.php?page=ver_post&post='.$registro['id_post'].'">Ver Postagem</a>';
-
+			<ul class="dropdown-menu"><li>
+				<a href="home.php?page=ver_post&post='.$registro['id_post'].'">Ver Postagem</a></li>';
 				if($registro['p_usuario']==$id_usuario){
-                    echo '<a href="#" class="post_excluir" data-id_post="'.$registro['id_post'].'">Excluir</a>';
-                }
-												
-			echo '</div></div>';
+                    echo '<li><a href="#" class="post_excluir" data-id_post="'.$registro['id_post'].'">Excluir</a></li>';
+                }					
+				echo '</li></div>';
 			echo '<h3 class="list-group-item-heading "><a href="home.php?page=ver_perfil_usuario&user='.$registro['id_usuario'].'"><img class="img-circle" width="50" height="50" src="imagens/users/'.$registro['id_usuario'].'/'.$registro['img'].'"></a><a href="home.php?page=ver_perfil_usuario&user='.$registro['id_usuario'].'">&nbsp;&nbsp;'.$registro['nome'].'&nbsp;'.$registro['sobrenome'].'</h3></a>';
 			
 			echo '<h5 align="center"><b>'.$registro['titulo'].'</b></h5>';			
 			echo '<p align="center" class="list-group-item-text"><img class="img-thumbnail" width="300" height="300" src="imagens/posts/'.$registro['img_post'].'"></p>';
-			echo '<p align="center" style="margin-bottom: 20px;" class="list-group-item-text">'.$registro['post'].'</p>';
-			echo '<small class="pull-right"> '.$registro['data_inclusao'].'</small></div>';
+			echo '<div class="panel-body"><p align="center" style="margin-bottom: 20px;" class="list-group-item-text">'.$registro['post'].'</p></div>';
+			echo '<div class="panel-footer"> <small style="margin-left:93%;"> '.$registro['data_inclusao'].'</small></div></div>';
 		}
 
 		
